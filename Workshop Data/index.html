@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hvor mye koster en rute?</title>
+
+  <!-- Roboto, same as the newspaper -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+
+  <!-- ===== The widget. Everything lives inside .cw so it can be dropped into an article. ===== -->
+  <figure class="cw" id="chocolate-widget">
+
+    <header class="cw__head">
+      <p class="cw__kicker">Grafikk</p>
+      <h2 class="cw__title">Hvor mye koster en rute?</h2>
+      <p class="cw__sub">Sjokoladeprisen har blitt 50 prosent dyrere. Her kan du se hvor mye mer du betaler per rute.</p>
+    </header>
+
+    <!-- Headline numbers for the chosen year -->
+    <div class="cw__stat" aria-live="polite">
+      <p class="cw__stat-main" id="stat-main"></p>
+      <p class="cw__stat-sub" id="stat-sub"></p>
+    </div>
+
+    <!-- The one chart: a plate of 24 pieces. Faded pieces = what the 2014 money no longer buys -->
+    <div class="plate" id="plate" role="img"></div>
+    <p class="cw__plate-label" id="plate-label"></p>
+
+    <!-- Year slider -->
+    <div class="cw__slider">
+      <button type="button" class="cw__play" id="play" aria-label="Spill av årene">
+        <svg class="i-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>
+        <svg class="i-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5h3v11H4zM9 2.5h3v11H9z"/></svg>
+      </button>
+      <div class="cw__track">
+        <label class="cw__sr" for="year">Velg år</label>
+        <input type="range" id="year" min="2014" max="2026" step="1" value="2026">
+        <div class="cw__ticks" id="ticks" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <p class="cw__note" id="note" hidden></p>
+
+    <figcaption class="cw__source">
+      Freia Melkesjokolade 200 g hos Rema 1000. Snittpris for året (alle registrerte ukepriser, inkludert tilbud),
+      rundet opp til hele kroner og delt på 24 ruter.
+      Kilde: <a href="https://enhver.no/price-history/69" target="_blank" rel="noopener">enhver.no</a>.
+    </figcaption>
+  </figure>
+
+  <!-- Data (a .js copy so it also works when opened straight from the folder) -->
+  <script src="assets/data/chocolate.js"></script>
+  <!-- Our code -->
+  <script src="script/data.js"></script>
+  <script src="script/plate.js"></script>
+  <script src="script/main.js"></script>
+</body>
+</html>
