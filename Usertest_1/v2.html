@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>User test 1 – Involvement · Version 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#e6e6e3; --card:#f8f8f6; --screen:#efefec; --ink:#121212; --soft:rgba(18,18,18,.55); --line:rgba(18,18,18,.12); --grey-t:#a9a9a5;
+  --speak:#1e9e57; --tap:#ff5b26; --write:#f6c400; --acct:#4f7fe8;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:"Inter Tight",Inter,system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;padding:24px 16px 60px}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+main{max-width:1080px;margin:0 auto}
+.top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.top a{font-size:13px;color:var(--soft);text-decoration:none}
+.top a:hover{color:var(--ink)}
+.top .who{font-size:13px;color:var(--soft)}
+.top .who b{color:var(--ink);font-weight:600}
+
+.vers{display:flex;gap:3px;background:rgba(255,255,255,.5);border-radius:999px;padding:4px}
+.vers a{font-size:13px;font-weight:600;padding:6px 14px;border-radius:999px;color:var(--soft)!important;text-decoration:none}
+.vers a.on{background:var(--ink);color:#f3f3f1!important}
+/* steps */
+.steps{display:flex;gap:4px;flex-wrap:wrap;margin:18px 0 26px;background:rgba(255,255,255,.45);border-radius:999px;padding:5px;width:max-content;max-width:100%}
+.steps button{display:flex;align-items:center;gap:7px;padding:8px 14px 8px 8px;border-radius:999px;font-size:13.5px;font-weight:500;color:#333}
+.steps button .n{font-family:var(--mono);font-size:11px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(0,0,0,.3)}
+.steps button.done .n{background:var(--speak);border-color:var(--speak);color:#fff}
+.steps button.on{background:var(--ink);color:#f3f3f1}
+.steps button.on .n{border-color:rgba(255,255,255,.4)}
+
+.step{display:none}
+.step.on{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:28px;animation:fade .3s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (max-width:860px){ .step.on{grid-template-columns:1fr} }
+.q .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--soft)}
+.q h1{font-size:44px;font-weight:700;letter-spacing:-.035em;line-height:1;margin:10px 0 14px}
+.q h1 span{color:var(--grey-t)}
+.q p.lead{font-size:16px;line-height:1.45;color:#3a3a38;max-width:440px}
+.q .task{margin-top:18px;background:rgba(255,255,255,.55);border-radius:18px;padding:14px 16px;font-size:14px;line-height:1.45}
+.q .task b{font-weight:600}
+.act{display:flex;flex-direction:column;gap:10px}
+.box{background:var(--card);border-radius:24px;padding:18px}
+.box h3{font-size:15px;font-weight:700;letter-spacing:-.01em;margin-bottom:10px}
+.hint{font-size:12.5px;color:var(--soft)}
+textarea,input[type=text]{font:inherit;font-size:15px;width:100%;border:1.5px solid transparent;background:var(--screen);border-radius:14px;padding:12px 14px;resize:vertical;color:var(--ink);outline:none}
+textarea:focus,input[type=text]:focus{border-color:var(--ink)}
+.nav{display:flex;justify-content:space-between;gap:8px;margin-top:6px}
+.btn{border-radius:999px;padding:14px 22px;font-size:15px;font-weight:600;background:var(--ink);color:#f3f3f1}
+.btn.ghost{background:rgba(255,255,255,.6);color:var(--ink)}
+.btn:disabled{opacity:.3;cursor:default}
+
+/* intro */
+.ptype{display:flex;gap:8px;flex-wrap:wrap}
+.pill{border-radius:999px;padding:11px 16px;font-weight:600;font-size:14px;background:var(--screen)}
+.pill.on{background:var(--ink);color:#f3f3f1}
+.qlist{counter-reset:q;display:flex;flex-direction:column;gap:8px}
+.qlist div{display:flex;gap:12px;align-items:flex-start;font-size:14.5px;line-height:1.4}
+.qlist div::before{counter-increment:q;content:counter(q);font-family:var(--mono);font-size:11px;width:24px;height:24px;flex:none;border-radius:50%;background:var(--screen);display:grid;place-items:center;margin-top:-1px}
+
+/* 1. control: scale + statements */
+.scale{position:relative;margin-top:6px}
+.scale input{width:100%;accent-color:#121212}
+.scale .ends{display:flex;justify-content:space-between;font-size:12px;color:var(--soft);margin-top:4px}
+.scale .val{font-size:17px;font-weight:700;letter-spacing:-.01em;margin-bottom:6px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:6px}
+.chip{text-align:left;background:var(--screen);border-radius:14px;padding:11px 12px;font-size:13.5px;font-weight:500;line-height:1.3;border:2px solid transparent;transition:background .15s}
+.chip.sel{background:var(--ink);color:#f3f3f1}
+.chip.sel.acct{background:var(--acct);border-color:var(--acct)}
+.count{font-family:var(--mono);font-size:11px;color:var(--soft)}
+
+/* 2. information: build a home screen */
+.build{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:14px;align-items:start}
+@media (max-width:620px){ .build{grid-template-columns:1fr} }
+.pool{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}
+.info{text-align:left;background:var(--screen);border-radius:14px;padding:10px 12px;border:2px solid transparent}
+.info b{display:block;font-size:13.5px;font-weight:600}
+.info span{font-size:11.5px;color:var(--soft)}
+.info.sel{border-color:var(--ink);background:#fff}
+.mini{background:#121212;border-radius:34px;padding:8px}
+.mini .scr{background:var(--screen);border-radius:27px;min-height:430px;padding:30px 10px 14px;display:flex;flex-direction:column;gap:6px;position:relative}
+.mini .scr::before{content:'';position:absolute;top:9px;left:50%;transform:translateX(-50%);width:64px;height:16px;border-radius:9px;background:#121212}
+.mini .hi{font-size:16px;font-weight:700;letter-spacing:-.02em;padding:2px 4px 4px}
+.tile{background:#fff;border-radius:14px;padding:9px 10px;animation:fade .25s}
+.tile .k{font-family:var(--mono);font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--soft)}
+.tile .v{font-size:15px;font-weight:700;letter-spacing:-.01em;margin-top:2px}
+.tile .rank{float:right;font-family:var(--mono);font-size:9px;color:var(--soft)}
+.mini .empty{font-size:12px;color:var(--soft);text-align:center;margin:auto 10px}
+
+/* 3. comfort matrix */
+.matrix{display:flex;flex-direction:column;gap:6px}
+.mrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;background:var(--screen);border-radius:14px;padding:8px 8px 8px 14px}
+.mrow b{font-size:14px;font-weight:600}
+.mrow small{display:block;font-size:11.5px;color:var(--soft);margin-top:1px}
+.seg{display:flex;gap:3px;flex-wrap:wrap;justify-content:flex-end}
+.seg button{font-size:11.5px;font-weight:600;padding:7px 9px;border-radius:10px;background:#fff;white-space:nowrap}
+.seg button.sel[data-v=do]{background:var(--speak);color:#fff}
+.seg button.sel[data-v=propose]{background:var(--write)}
+.seg button.sel[data-v=inform]{background:var(--tap);color:#fff}
+.seg button.sel[data-v=acct]{background:var(--acct);color:#fff}
+.seg button.sel[data-v=no]{background:var(--ink);color:#fff}
+.legend{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:4px 14px;font-size:12px;color:var(--soft);margin-top:8px}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
+@media (max-width:620px){ .mrow{grid-template-columns:1fr} .seg{justify-content:flex-start} }
+
+/* 4. prediction to action */
+.pred{background:var(--ink);color:#f3f3f1;border-radius:24px;padding:18px}
+.pred .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(243,243,241,.55)}
+.pred .t{font-size:22px;font-weight:700;letter-spacing:-.02em;line-height:1.15;margin-top:8px}
+.pred .c{font-size:12.5px;color:rgba(243,243,241,.65);margin-top:8px}
+.pred .switch{display:flex;gap:4px;margin-top:12px;flex-wrap:wrap}
+.pred .switch button{font-size:12px;font-weight:600;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.12);color:#f3f3f1}
+.pred .switch button.on{background:#f3f3f1;color:var(--ink)}
+.chain{display:flex;flex-direction:column;gap:6px;min-height:46px}
+.chain .link{display:flex;align-items:center;gap:10px;background:#fff;border-radius:14px;padding:10px 12px;font-size:14px;font-weight:600;animation:fade .2s}
+.chain .link .no{font-family:var(--mono);font-size:11px;width:22px;height:22px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;flex:none}
+.chain .link .x{margin-left:auto;color:var(--soft);font-size:16px;padding:0 4px}
+.chain .placeholder{font-size:13px;color:var(--soft);border:1.5px dashed rgba(18,18,18,.25);border-radius:14px;padding:12px;text-align:center}
+.actions{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:6px}
+.actions button{text-align:left;background:var(--screen);border-radius:14px;padding:10px 12px;font-size:13.5px;font-weight:500}
+.actions button:disabled{opacity:.35;cursor:default}
+.actions button.acct{background:#e3ebfc}
+
+/* summary */
+.sum h3{font-size:13px;font-family:var(--mono);font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);margin:14px 0 6px}
+.sum h3:first-child{margin-top:0}
+.sum p,.sum li{font-size:14.5px;line-height:1.45}
+.sum ul{padding-left:18px}
+
+/* facilitator */
+.fac{grid-column:1/-1;background:rgba(255,255,255,.5);border-radius:22px;padding:14px 18px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+@media (max-width:860px){ .fac{grid-template-columns:1fr} }
+.fac h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);font-weight:500;margin-bottom:6px}
+.fac ul{padding-left:18px;font-size:13.5px;line-height:1.45}
+.fac textarea{min-height:84px;background:#fff;font-size:14px}
+.saved{margin-top:10px}
+.saved div{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-top:1px solid var(--line);font-size:13px}
+.saved span{color:var(--soft)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:var(--ink);color:#f3f3f1;border-radius:14px;padding:12px 16px;font-size:14px;opacity:0;transition:all .3s;pointer-events:none}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<main>
+  <div class="top">
+    <a href="../">← Studio Editorial</a>
+    <div class="vers"><a href="./">Version 1</a><a href="v2.html" class="on">Version 2</a></div>
+    <div class="who" id="who">No participant yet</div>
+  </div>
+
+  <nav class="steps" id="steps"></nav>
+
+  <!-- 0. START -->
+  <section class="step on" data-step="0">
+    <div class="q">
+      <div class="eyebrow">User test 1 · Involvement · Version 2</div>
+      <h1>When do you feel <span>in control?</span></h1>
+      <p class="lead">Four questions about how much you want to be involved when an AI like Taki does most of the work in your business. There are no right answers.</p>
+      <div class="task" style="margin-top:22px">
+        <div class="qlist">
+          <div>What does involvement mean to you, and when do you feel in control?</div>
+          <div>What information do you want to see to do your daily tasks?</div>
+          <div>What would you be comfortable letting an AI predict and propose?</div>
+          <div>How would you move from a prediction to an action, and what does it result in?</div>
+        </div>
+      </div>
+    </div>
+    <div class="act">
+      <div class="box">
+        <h3>Participant</h3>
+        <input type="text" id="pName" placeholder="Name or code, e.g. P1">
+        <h3 style="margin-top:16px">Experience with Taki</h3>
+        <div class="ptype">
+          <button class="pill" data-ptype="knows">Uses Taki today</button>
+          <button class="pill" data-ptype="new">New to Taki</button>
+        </div>
+        <h3 style="margin-top:16px">Their business</h3>
+        <input type="text" id="pBiz" placeholder="e.g. hairdresser, carpenter, consultant">
+      </div>
+      <div class="nav"><span></span><button class="btn" data-next>Start →</button></div>
+    </div>
+  </section>
+
+  <!-- 1. CONTROL -->
+  <section class="step" data-step="1">
+    <div class="q">
+      <div class="eyebrow">Question 1 of 4 · Involvement</div>
+      <h1>What does involvement <span>mean to you?</span></h1>
+      <p class="lead">Or put differently: when do you feel like you have control?</p>
+      <div class="task"><b>Your task:</b> Place yourself on the scale, then pick up to three things that make you feel in control. Say why out loud.</div>
+    </div>
+    <div class="act">
+      <div class="box">
+        <h3>How involved do you want to be in your business admin?</h3>
+        <div class="scale">
+          <div class="val" id="scaleVal">Somewhere in the middle</div>
+          <input type="range" id="scale" min="0" max="100" value="50" aria-label="Involvement">
+          <div class="ends"><span>Taki does it all</span><span>I do it all myself</span></div>
+        </div>
+      </div>
+      <div class="box">
+        <h3>I feel in control when… <span class="count" id="ctrlCount">0 / 3</span></h3>
+        <div class="cards" id="ctrlCards"></div>
+        <input type="text" id="ctrlOwn" placeholder="Something else? Write it here" style="margin-top:8px">
+      </div>
+      <div class="nav"><button class="btn ghost" data-prev>← Back</button><button class="btn" data-next>Next →</button></div>
+    </div>
+  </section>
+
+  <!-- 2. INFORMATION -->
+  <section class="step" data-step="2">
+    <div class="q">
+      <div class="eyebrow">Question 2 of 4 · Information</div>
+      <h1>What do you want <span>to see?</span></h1>
+      <p class="lead">What information do you need to see, to feel on top of your daily tasks?</p>
+      <div class="task"><b>Your task:</b> Build your own morning screen. Pick the five things you'd want to see first, in order of importance. The first one you pick goes on top.</div>
+    </div>
+    <div class="act">
+      <div class="build">
+        <div class="box">
+          <h3>Information <span class="count" id="infoCount">0 / 5</span></h3>
+          <div class="pool" id="pool"></div>
+          <input type="text" id="infoOwn" placeholder="Missing something? Write it here" style="margin-top:8px">
+        </div>
+        <div class="mini"><div class="scr" id="miniScr"><div class="hi">Good morning</div><div class="empty">Your screen is empty. Pick something on the left.</div></div></div>
+      </div>
+      <div class="nav"><button class="btn ghost" data-prev>← Back</button><button class="btn" data-next>Next →</button></div>
+    </div>
+  </section>
+
+  <!-- 3. COMFORT -->
+  <section class="step" data-step="3">
+    <div class="q">
+      <div class="eyebrow">Question 3 of 4 · Predictions</div>
+      <h1>What may an AI <span>predict for you?</span></h1>
+      <p class="lead">What would you be comfortable letting an AI predict and propose to you?</p>
+      <div class="task"><b>Your task:</b> For each kind of prediction, choose what Taki is allowed to do. Think out loud: where is the line?</div>
+    </div>
+    <div class="act">
+      <div class="box">
+        <div class="matrix" id="matrix"></div>
+        <div class="legend">
+          <span><i style="background:var(--speak)"></i><b>Do it</b>: predict and act</span>
+          <span><i style="background:var(--write)"></i><b>Propose</b>: I approve first</span>
+          <span><i style="background:var(--tap)"></i><b>Inform</b>: just tell me</span>
+          <span><i style="background:var(--acct)"></i><b>Accountant</b>: a human checks</span>
+          <span><i style="background:var(--ink)"></i><b>No</b>: don't predict this</span>
+        </div>
+      </div>
+      <div class="nav"><button class="btn ghost" data-prev>← Back</button><button class="btn" data-next>Next →</button></div>
+    </div>
+  </section>
+
+  <!-- 4. ACTION -->
+  <section class="step" data-step="4">
+    <div class="q">
+      <div class="eyebrow">Question 4 of 4 · From prediction to action</div>
+      <h1>What would you <span>do next?</span></h1>
+      <p class="lead">How would you move from a prediction to an action? And what does it result in?</p>
+      <div class="task"><b>Your task:</b> Read Taki's prediction. Build the steps you would take, in order, by tapping the actions. Then describe what you think it results in.</div>
+    </div>
+    <div class="act">
+      <div class="pred">
+        <div class="k">Taki predicts</div>
+        <div class="t" id="predT"></div>
+        <div class="c" id="predC"></div>
+        <div class="switch" id="predSwitch"></div>
+      </div>
+      <div class="box">
+        <h3>My steps</h3>
+        <div class="chain" id="chain"></div>
+        <h3 style="margin-top:14px">Add a step</h3>
+        <div class="actions" id="actions"></div>
+      </div>
+      <div class="box">
+        <h3>What does it result in?</h3>
+        <textarea id="result" rows="3" placeholder="What happens in the end? How would you feel about it?"></textarea>
+      </div>
+      <div class="nav"><button class="btn ghost" data-prev>← Back</button><button class="btn" data-next>See summary →</button></div>
+    </div>
+  </section>
+
+  <!-- 5. SUMMARY -->
+  <section class="step" data-step="5">
+    <div class="q">
+      <div class="eyebrow">Summary</div>
+      <h1>Thank you<span>!</span></h1>
+      <p class="lead">Here is what you told us. Is there anything you'd like to change or add?</p>
+    </div>
+    <div class="act">
+      <div class="box sum" id="summary"></div>
+      <div class="nav"><button class="btn ghost" data-prev>← Back</button><button class="btn" id="saveBtn2">Save participant</button></div>
+    </div>
+  </section>
+
+  <!-- FACILITATOR (shown under every step) -->
+  <section class="fac" id="fac">
+    <div>
+      <h4 id="facTitle">Facilitator</h4>
+      <ul id="facList"></ul>
+    </div>
+    <div>
+      <h4>Notes for this question</h4>
+      <textarea id="facNotes" placeholder="Quotes, hesitations, what surprised you…"></textarea>
+      <div class="row" style="margin-top:8px">
+        <button class="pill" id="saveBtn">Save participant</button>
+        <button class="pill" id="newBtn">New participant</button>
+        <button class="pill" id="csvBtn">Download CSV</button>
+      </div>
+      <div class="saved" id="saved"></div>
+    </div>
+  </section>
+</main>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ---------------- content ---------------- */
+const STEPS=['Start','Control','Information','Predictions','Action','Summary'];
+const CONTROL=[
+  ['see','I see it before it happens'],['undo','I can undo it'],['why','I understand why'],['told','I’m told afterwards'],
+  ['decide','I make the final decision'],['numbers','I can see all the numbers'],['habit','It always works the same way'],
+  ['acct','A human (accountant) has checked it'],['speed','Things happen fast'],['ask','I can ask questions']];
+const INFO=[
+  ['bank','Bank balance','42 300 kr'],['owed','Money owed to me','2 invoices · 9 900 kr'],['deadlines','Upcoming deadlines','VAT return in 8 days'],
+  ['jobs','Today’s jobs','3 appointments'],['receipts','Receipts to approve','5 waiting'],['profit','Profit this month','+18 400 kr'],
+  ['forecast','Forecast next weeks','Busy until week 46'],['taxset','Tax money set aside','14 000 of 15 400 kr'],
+  ['accountant','Messages from accountant','1 new question'],['tips','Tips from Taki','Raise price on setups?'],
+  ['done','What Taki did for me','12 tasks this week'],['goal','Progress on my goal','62 % of yearly target']];
+const PREDS=[
+  ['cash','Money next month','How much will be in the bank'],['paytime','When customers will pay','Who is likely to be late'],
+  ['busy','Busy and quiet weeks','How much work is coming'],['tax','Tax to set aside','How much to save each week'],
+  ['prices','Price changes','What happens if I raise prices'],['buy','When to buy equipment','Now or later'],
+  ['hire','Hiring help','When I need an extra person'],['profit','Next year’s profit','For the tax deduction card']];
+const LEVELS=[['do','Do it'],['propose','Propose'],['inform','Inform'],['acct','Accountant'],['no','No']];
+const SCEN=[
+  {id:'busy',t:'Spring looks about 40 % busier than this year.',c:'Based on bookings, last year’s season and 3 new school customers · Taki is 6/10 sure'},
+  {id:'cash',t:'In March you may not have enough money to pay your bills.',c:'VAT, advance tax and rent fall in the same two weeks · Taki is 8/10 sure'},
+  {id:'price',t:'If you raise prices 10 %, you will likely earn 2 500–4 000 kr more a month.',c:'Based on similar businesses and your customers · Taki is 5/10 sure'}];
+const ACTIONS=[['why','Ask Taki why'],['numbers','Look at the numbers'],['acct','Ask my accountant'],['someone','Talk to someone I trust'],
+  ['wait','Wait and see'],['approve','Approve Taki’s plan'],['ownplan','Make my own plan'],['adjust','Change Taki’s plan'],['ignore','Ignore it']];
+const FAC={
+  0:['Explain: "We are testing ideas, not you. There are no wrong answers."','Ask if it’s OK to take notes and quotes.','Ask about their business and how they handle admin today.'],
+  1:['"Why did you put yourself there on the scale?"','"Tell me about a time you felt you lost control of something in your business."','For people new to Taki: "How do you do this today?"'],
+  2:['"Why is that one first?"','"What would you check first thing in the morning, honestly?"','"Is there anything here you never want to see?"'],
+  3:['"Where is the line for you, and why there?"','"Would it change if Taki had been right many times before?"','"When do you want a human instead of the AI?"'],
+  4:['Try more than one prediction if there is time.','"What would make you skip a step?"','"What would you expect to have happened a month later?"'],
+  5:['Read the summary out loud together.','"Is there anything we didn’t ask that we should have?"','Save the participant before closing.']};
+
+/* ---------------- state ---------------- */
+const fresh=()=>({name:'',type:'',biz:'',scale:50,control:[],controlOwn:'',info:[],infoOwn:'',comfort:{},scenario:'busy',chain:[],result:'',notes:{}});
+let st=fresh(), step=0;
+const $=id=>document.getElementById(id);
+
+/* ---------------- step navigation ---------------- */
+function renderSteps(){
+  $('steps').innerHTML=STEPS.map((n,i)=>`<button class="${i===step?'on':''} ${i<step?'done':''}" data-go="${i}"><span class="n">${i===0?'·':i===5?'✓':i}</span>${n}</button>`).join('');
+  document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(+b.dataset.go));
+}
+function go(i){
+  saveNote(); step=Math.max(0,Math.min(5,i));
+  document.querySelectorAll('.step').forEach(s=>s.classList.toggle('on',+s.dataset.step===step));
+  renderSteps(); renderFac(); if(step===5) renderSummary();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('[data-next]').forEach(b=>b.onclick=()=>go(step+1));
+document.querySelectorAll('[data-prev]').forEach(b=>b.onclick=()=>go(step-1));
+function renderFac(){
+  $('facTitle').textContent = step===0?'Facilitator · Start':step===5?'Facilitator · Wrap-up':`Facilitator · Question ${step}`;
+  $('facList').innerHTML = FAC[step].map(x=>`<li>${x}</li>`).join('');
+  $('facNotes').value = st.notes[step]||'';
+}
+function saveNote(){ st.notes[step]=$('facNotes').value; }
+$('facNotes').addEventListener('input',saveNote);
+
+/* ---------------- 0. participant ---------------- */
+function renderWho(){ $('who').innerHTML = st.name ? `<b>${esc(st.name)}</b> · ${st.type==='knows'?'Uses Taki':st.type==='new'?'New to Taki':'–'}${st.biz?' · '+esc(st.biz):''}` : 'No participant yet'; }
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+$('pName').oninput=e=>{st.name=e.target.value;renderWho();};
+$('pBiz').oninput=e=>{st.biz=e.target.value;renderWho();};
+document.querySelectorAll('[data-ptype]').forEach(b=>b.onclick=()=>{st.type=b.dataset.ptype;paintType();renderWho();});
+function paintType(){ document.querySelectorAll('[data-ptype]').forEach(b=>b.classList.toggle('on',b.dataset.ptype===st.type)); }
+
+/* ---------------- 1. control ---------------- */
+const scaleWords=v=>v<15?'Taki can do almost everything':v<40?'Taki does most, I keep an eye on it':v<61?'Somewhere in the middle':v<86?'I want to do most of it myself':'I want to do everything myself';
+$('scale').oninput=e=>{st.scale=+e.target.value;$('scaleVal').textContent=scaleWords(st.scale);};
+function renderControl(){
+  $('ctrlCards').innerHTML=CONTROL.map(([k,t])=>`<button class="chip ${k==='acct'?'acct':''} ${st.control.includes(k)?'sel':''}" data-c="${k}">${t}</button>`).join('');
+  $('ctrlCount').textContent=st.control.length+' / 3';
+  document.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{
+    const k=b.dataset.c, i=st.control.indexOf(k);
+    if(i>=0) st.control.splice(i,1); else if(st.control.length<3) st.control.push(k); else toast('Pick up to three. Tap one to remove it first.');
+    renderControl();
+  });
+}
+$('ctrlOwn').oninput=e=>st.controlOwn=e.target.value;
+
+/* ---------------- 2. information ---------------- */
+function renderInfo(){
+  $('pool').innerHTML=INFO.map(([k,t,v])=>`<button class="info ${st.info.includes(k)?'sel':''}" data-i="${k}"><b>${t}</b><span>${v}</span></button>`).join('');
+  $('infoCount').textContent=st.info.length+' / 5';
+  document.querySelectorAll('[data-i]').forEach(b=>b.onclick=()=>{
+    const k=b.dataset.i, i=st.info.indexOf(k);
+    if(i>=0) st.info.splice(i,1); else if(st.info.length<5) st.info.push(k); else toast('Five is the maximum. Tap one to remove it.');
+    renderInfo();
+  });
+  const tiles=st.info.map((k,i)=>{ const [,t,v]=INFO.find(x=>x[0]===k); return `<div class="tile"><span class="rank">${i+1}</span><div class="k">${t}</div><div class="v">${v}</div></div>`; }).join('');
+  $('miniScr').innerHTML='<div class="hi">Good morning</div>'+(tiles||'<div class="empty">Your screen is empty. Pick something on the left.</div>');
+}
+$('infoOwn').oninput=e=>st.infoOwn=e.target.value;
+
+/* ---------------- 3. comfort ---------------- */
+function renderMatrix(){
+  $('matrix').innerHTML=PREDS.map(([k,t,d])=>`<div class="mrow"><div><b>${t}</b><small>${d}</small></div><div class="seg">${LEVELS.map(([v,n])=>`<button data-p="${k}" data-v="${v}" class="${st.comfort[k]===v?'sel':''}">${n}</button>`).join('')}</div></div>`).join('');
+  document.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>{ st.comfort[b.dataset.p]=b.dataset.v; renderMatrix(); });
+}
+
+/* ---------------- 4. action chain ---------------- */
+function renderScenario(){
+  const s=SCEN.find(x=>x.id===st.scenario);
+  $('predT').textContent=s.t; $('predC').textContent=s.c;
+  $('predSwitch').innerHTML=SCEN.map((x,i)=>`<button data-s="${x.id}" class="${x.id===st.scenario?'on':''}">Prediction ${i+1}</button>`).join('');
+  document.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{
+    if(b.dataset.s===st.scenario) return;
+    if(st.chain.length||st.result){ st.done=st.done||{}; st.done[st.scenario]={chain:st.chain.slice(),result:st.result}; }
+    st.scenario=b.dataset.s; const prev=(st.done||{})[st.scenario]||{chain:[],result:''};
+    st.chain=prev.chain.slice(); st.result=prev.result; $('result').value=st.result; renderScenario(); renderChain();
+  });
+}
+function renderChain(){
+  $('chain').innerHTML = st.chain.length ? st.chain.map((k,i)=>`<div class="link"><span class="no">${i+1}</span>${ACTIONS.find(a=>a[0]===k)[1]}<button class="x" data-rm="${i}" aria-label="Remove">×</button></div>`).join('') : '<div class="placeholder">Tap an action below to add your first step</div>';
+  $('actions').innerHTML=ACTIONS.map(([k,t])=>`<button data-a="${k}" class="${k==='acct'?'acct':''}" ${st.chain.includes(k)?'disabled':''}>${t}</button>`).join('');
+  document.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>{ st.chain.push(b.dataset.a); renderChain(); });
+  document.querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>{ st.chain.splice(+b.dataset.rm,1); renderChain(); });
+}
+$('result').oninput=e=>st.result=e.target.value;
+
+/* ---------------- summary ---------------- */
+const lab=(arr,k)=>(arr.find(x=>x[0]===k)||[,k])[1];
+function allScenarios(){ const d=Object.assign({},st.done||{}); if(st.chain.length||st.result) d[st.scenario]={chain:st.chain,result:st.result}; return d; }
+function renderSummary(){
+  const sc=allScenarios();
+  $('summary').innerHTML=`
+    <h3>1 · Involvement</h3><p>${scaleWords(st.scale)} (${st.scale}/100).</p>
+    <p>In control when: ${st.control.map(k=>lab(CONTROL,k).toLowerCase()).join(', ')||'–'}${st.controlOwn?'; '+esc(st.controlOwn):''}.</p>
+    <h3>2 · Morning screen</h3><p>${st.info.map((k,i)=>`${i+1}. ${lab(INFO,k)}`).join(' · ')||'–'}${st.infoOwn?' · Also: '+esc(st.infoOwn):''}</p>
+    <h3>3 · What Taki may predict</h3><ul>${PREDS.map(([k,t])=>`<li>${t}: <b>${st.comfort[k]?lab(LEVELS,st.comfort[k]):'–'}</b></li>`).join('')}</ul>
+    <h3>4 · From prediction to action</h3>${Object.keys(sc).length?Object.entries(sc).map(([id,v])=>`<p><b>${SCEN.find(x=>x.id===id).t}</b><br>${v.chain.map(k=>lab(ACTIONS,k)).join(' → ')||'–'}${v.result?'<br><i>Result: '+esc(v.result)+'</i>':''}</p>`).join(''):'<p>–</p>'}`;
+}
+
+/* ---------------- saving ---------------- */
+const KEY='taki-usertest1-v2';
+const loadAll=()=>{ try{ return JSON.parse(localStorage.getItem(KEY)||'[]') }catch(e){ return [] } };
+const saveAll=a=>{ try{ localStorage.setItem(KEY,JSON.stringify(a)); return true }catch(e){ return false } };
+function renderSaved(){ const a=loadAll(); $('saved').innerHTML=a.map(r=>`<div><b>${esc(r.name||'(no name)')}</b><span>${r.type==='knows'?'Uses Taki':r.type==='new'?'New to Taki':'–'} · ${r.time}</span></div>`).join(''); }
+function saveParticipant(){
+  saveNote();
+  if(!st.name){ toast('Add a name or code first (on Start).'); return; }
+  const a=loadAll(), rec=Object.assign({},st,{scenarios:allScenarios(),time:new Date().toLocaleString('nb-NO',{dateStyle:'short',timeStyle:'short'})});
+  const i=a.findIndex(r=>r.name===rec.name); if(i>=0) a[i]=rec; else a.push(rec);
+  toast(saveAll(a)?'Saved '+st.name:'Could not save in this browser. Download the CSV instead.'); renderSaved();
+}
+$('saveBtn').onclick=saveParticipant; $('saveBtn2').onclick=saveParticipant;
+$('newBtn').onclick=()=>{ if(st.name && !loadAll().some(r=>r.name===st.name) && !confirmNew()) return; st=fresh(); hydrate(); go(0); };
+function confirmNew(){ toast('Not saved yet. Press “New participant” again to discard.'); if(confirmNew.armed){ confirmNew.armed=false; return true; } confirmNew.armed=true; setTimeout(()=>confirmNew.armed=false,4000); return false; }
+$('csvBtn').onclick=()=>{
+  const a=loadAll(); if(st.name && !a.some(r=>r.name===st.name)) a.push(Object.assign({},st,{scenarios:allScenarios(),time:'(not saved)'}));
+  if(!a.length){ toast('Nothing to download yet.'); return; }
+  const q=v=>'"'+String(v??'').replace(/"/g,'""')+'"';
+  const head=['participant','type','business','time','involvement 0-100','in control when','in control (own words)',
+    ...[1,2,3,4,5].map(n=>'morning screen '+n),'info (own words)',...PREDS.map(p=>'may predict: '+p[1]),
+    ...SCEN.flatMap((s,i)=>['prediction '+(i+1)+' steps','prediction '+(i+1)+' result']),
+    'notes start','notes Q1','notes Q2','notes Q3','notes Q4','notes wrap-up'];
+  const rows=a.map(r=>{ const sc=r.scenarios||{}; return [r.name,r.type,r.biz,r.time,r.scale,r.control.map(k=>lab(CONTROL,k)).join('; '),r.controlOwn,
+    ...[0,1,2,3,4].map(i=>r.info[i]?lab(INFO,r.info[i]):''),r.infoOwn,...PREDS.map(p=>r.comfort[p[0]]?lab(LEVELS,r.comfort[p[0]]):''),
+    ...SCEN.flatMap(s=>{ const v=sc[s.id]; return v?[v.chain.map(k=>lab(ACTIONS,k)).join(' → '),v.result]:['','']; }),
+    ...[0,1,2,3,4,5].map(i=>(r.notes||{})[i]||'')]; });
+  const csv=[head,...rows].map(r=>r.map(q).join(',')).join('\n');
+  const l=document.createElement('a'); l.href=URL.createObjectURL(new Blob(['﻿'+csv],{type:'text/csv'})); l.download='taki-user-test-1-v2.csv'; document.body.appendChild(l); l.click(); l.remove();
+};
+let tt; function toast(m){ const t=$('toast'); t.textContent=m; t.classList.add('on'); clearTimeout(tt); tt=setTimeout(()=>t.classList.remove('on'),2600); }
+
+/* ---------------- start ---------------- */
+function hydrate(){
+  $('pName').value=st.name; $('pBiz').value=st.biz; $('scale').value=st.scale; $('scaleVal').textContent=scaleWords(st.scale);
+  $('ctrlOwn').value=st.controlOwn; $('infoOwn').value=st.infoOwn; $('result').value=st.result;
+  paintType(); renderWho(); renderControl(); renderInfo(); renderMatrix(); renderScenario(); renderChain();
+}
+hydrate(); renderSteps(); renderFac(); renderSaved();
+</script>
+</body>
+</html>
