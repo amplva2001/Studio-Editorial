@@ -52,6 +52,23 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .caption{max-width:520px;text-align:center;font-size:13.5px;line-height:1.5;color:#6b6b67;min-height:42px;margin-bottom:22px}
 .caption b{font-weight:600;color:var(--ink)}
 
+/* ---------- version menu ---------- */
+.control{flex-direction:column;align-items:stretch;gap:6px;background:rgba(255,255,255,.45);border-radius:22px;padding:8px 10px}
+.vrow{display:flex;align-items:center;gap:4px;flex-wrap:wrap;opacity:.55;transition:opacity .2s}
+.vrow.current,.vrow:hover{opacity:1}
+.vname{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);width:84px;padding-left:6px;flex:none}
+.vrow.current .vname{color:var(--ink);font-weight:500}
+.control a.vlink{display:flex;align-items:center;gap:8px;padding:9px 15px 9px 10px;border-radius:999px;font-size:14px;font-weight:500;color:#222;text-decoration:none;transition:background .2s}
+.control a.vlink:hover{background:rgba(0,0,0,.08)}
+.control .n{min-width:22px;width:auto!important;padding:0 5px;border-radius:999px!important}
+.control a.vlink .n{font-family:var(--mono);font-size:11px;height:22px;display:grid;place-items:center;border:1px solid rgba(0,0,0,.35)}
+.control a.vlink[data-k=speak] .n{background:var(--speak);border-color:var(--speak);color:#fff}
+.control a.vlink[data-k=tap] .n{background:var(--tap);border-color:var(--tap);color:#fff}
+.control a.vlink[data-k=write] .n{background:var(--write);border-color:var(--write);color:var(--ink)}
+.control a.vlink.peer{box-shadow:inset 0 0 0 1.5px rgba(0,0,0,.25)}
+.vtools{display:flex;justify-content:flex-end;border-top:1px solid rgba(0,0,0,.08);padding-top:4px}
+.vtools .reset{font-size:13px;padding:6px 10px;border-radius:999px}
+
 /* ---------- phone ---------- */
 .phone{width:390px;max-width:100%;height:844px;border-radius:56px;border:7px solid #141414;box-shadow:0 0 0 1.5px #3c4a55,0 40px 70px rgba(0,0,0,.14);position:relative;overflow:hidden;background:var(--screen)}
 .island{position:absolute;left:50%;top:10px;transform:translateX(-50%);width:118px;height:33px;background:#0b0b0b;border-radius:20px;z-index:6}
@@ -200,6 +217,64 @@ h1 .g{color:var(--grey-t)}
 .toast{position:absolute;left:14px;right:14px;bottom:26px;background:var(--ink);color:#f3f3f1;border-radius:18px;padding:13px 15px;font-size:13.5px;font-weight:500;line-height:1.35;opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none;z-index:20}
 .toast.on{opacity:1;transform:none}
 
+
+/* ---------- 5. WIDGETS (home screen) ---------- */
+#widgets{background:var(--screen)}
+#widgets::before,#widgets::after{content:'';position:absolute;border-radius:50%;pointer-events:none}
+#widgets::before{width:520px;height:520px;left:-210px;top:150px;border:44px solid #e5e5e1}
+#widgets::after{width:300px;height:300px;right:-130px;top:-90px;background:#e7e7e3}
+.hs{position:relative;z-index:1;flex:1;padding:12px 22px 0;display:grid;grid-template-columns:156px 156px;column-gap:20px;align-content:start}
+.wg{background:var(--card);border-radius:26px;box-shadow:0 1px 0 rgba(0,0,0,.04),0 10px 24px rgba(0,0,0,.05);position:relative;overflow:hidden;cursor:pointer;transition:transform .15s}
+.wg:active{transform:scale(.98)}
+.wlabel{font-size:11.5px;font-weight:500;text-align:center;color:var(--soft);margin:6px 0 12px}
+.wlabel b{color:var(--ink);font-weight:600}
+.w-s{width:156px;height:156px;padding:14px;display:flex;flex-direction:column}
+.w-m{grid-column:span 2;height:156px;padding:14px;display:flex;gap:12px}
+.w-l{grid-column:span 2;height:300px;padding:16px;display:flex;flex-direction:column}
+.wtop{display:flex;justify-content:space-between;align-items:center}
+.wtop .sym{width:30px;height:30px}
+.wlev{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);display:flex;align-items:center}
+.wlev .dot{width:7px;height:7px;margin-right:5px}
+/* small: speak */
+.w-s .wt{font-size:17px;font-weight:700;letter-spacing:-.02em;line-height:1.05;margin-top:auto}
+.w-s .wd{font-family:var(--mono);font-size:9.5px;color:var(--soft);margin-top:4px;letter-spacing:.02em}
+.w-s .wact{display:flex;align-items:center;gap:8px;margin-top:10px}
+.wmic{width:34px;height:34px;border-radius:50%;background:var(--speak);color:#fff;display:grid;place-items:center;flex:none}
+.wmic.listen{animation:pulse 1s ease-in-out infinite}
+.w-s .wact span{font-size:12px;font-weight:600}
+/* icons grid */
+.apps{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;height:156px;align-content:space-between}
+.app{display:flex;flex-direction:column;align-items:center;gap:5px}
+.app i{width:62px;height:62px;border-radius:16px;background:#e2e2de;display:grid;place-items:center;font-style:normal;font-size:20px;color:#8d8d89}
+.app span{font-size:10.5px;color:var(--soft);font-weight:500}
+.app.taki i{background:var(--ink);color:#f3f3f1;font-weight:700;font-size:15px;letter-spacing:-.02em}
+/* medium: tap */
+.w-m .mleft{flex:1;display:flex;flex-direction:column;min-width:0}
+.w-m .mbig{font-size:28px;font-weight:700;letter-spacing:-.03em;margin-top:auto;line-height:1}
+.w-m .msub{font-size:12px;color:var(--soft);margin-top:4px;font-weight:500}
+.w-m .mright{width:150px;flex:none;background:var(--tap);border-radius:18px;padding:11px;display:flex;flex-direction:column}
+.w-m .mright .q{font-size:12.5px;font-weight:600;line-height:1.2}
+.w-m .mright .q small{display:block;font-family:var(--mono);font-size:9px;font-weight:400;letter-spacing:.06em;opacity:.7;margin-bottom:3px}
+.wseg{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:auto}
+.wseg button{background:rgba(255,255,255,.3);border-radius:10px;padding:8px 0;font-size:11.5px;font-weight:600}
+.wseg button:hover{background:rgba(255,255,255,.45)}
+.wdone{margin-top:auto;font-size:12.5px;font-weight:600;display:none}
+.wdone.on{display:block}
+/* large: write */
+.w-l .lq{font-size:22px;font-weight:700;letter-spacing:-.025em;line-height:1.05;margin-top:12px}
+.w-l .lq span{color:var(--grey-t)}
+.w-l .lback{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-top:14px}
+.w-l .lback .k{font-family:var(--mono);font-size:9.5px;color:var(--soft);letter-spacing:.04em}
+.w-l .lback .v{font-size:17px;font-weight:700;letter-spacing:-.02em;margin-top:2px}
+.w-l .mbars{display:flex;align-items:flex-end;gap:3px;height:34px;width:130px}
+.w-l .mbars div{flex:1;background:#dcdcd8;border-radius:1.5px}
+.w-l .mbars div.hi{background:var(--ink)}
+.w-l .lfield{margin-top:auto;display:flex;align-items:center;gap:10px;background:var(--screen);border-radius:18px;padding:12px 12px 12px 15px}
+.w-l .lfield span{flex:1;font-size:14px;color:var(--grey-t);font-weight:500}
+.w-l .lpen{width:38px;height:38px;border-radius:50%;background:var(--write);display:grid;place-items:center;flex:none}
+.w-l .lfoot{font-family:var(--mono);font-size:9.5px;color:var(--soft);margin-top:9px;letter-spacing:.02em}
+.hs-search{position:relative;z-index:1;align-self:center;margin:0 auto 34px;font-size:12px;font-weight:500;color:var(--soft);background:rgba(18,18,18,.06);padding:6px 14px;border-radius:999px}
+
 @media (max-width:440px){
   body{padding:12px 0 20px}
   .pagehead{padding:0 16px}
@@ -210,18 +285,28 @@ h1 .g{color:var(--grey-t)}
 <body>
 
 <header class="pagehead">
-  <div class="title"><b>Taki Oracle</b> Effort</div>
+  <div class="title"><b>Taki Oracle</b> Effort · Version 1</div>
   <div class="meta">Magnus · instrument repair · ENK</div>
 </header>
 
 <nav class="control" aria-label="Prototype controls">
-  <button data-go="speak" class="on"><span class="n">1</span>Speak · low</button>
-  <button data-go="tap"><span class="n">2</span>Tap · middle</button>
-  <button data-go="write"><span class="n">3</span>Write · high</button>
-  <span class="sep"></span>
-  <button data-go="oversight"><span class="n">4</span>Oversight</button>
-  <span class="sep"></span>
-  <button class="reset" id="restart" title="Restart this scenario (R)">↺ Restart</button>
+  <div class="vrow current"><span class="vname">Version 1</span>
+    <button data-go="speak" class="on"><span class="n">1</span>Speak · low</button>
+    <button data-go="tap"><span class="n">2</span>Tap · middle</button>
+    <button data-go="write"><span class="n">3</span>Write · high</button>
+    <span class="sep"></span>
+    <button data-go="oversight"><span class="n">4</span>Oversight</button>
+    <button data-go="widgets"><span class="n">5</span>Widgets</button>
+  </div>
+  <div class="vrow"><span class="vname">Version 2</span>
+    <a class="vlink" data-k="speak" href="v2.html#speak"><span class="n">1.1</span>Speak · low</a>
+    <a class="vlink" data-k="tap" href="v2.html#tap"><span class="n">2.1</span>Tap · middle</a>
+    <a class="vlink" data-k="write" href="v2.html#write"><span class="n">3.1</span>Write · high</a>
+    <span class="sep"></span>
+    <a class="vlink" data-k="oversight" href="v2.html#oversight"><span class="n">4.1</span>Oversight</a>
+    <a class="vlink" data-k="widgets" href="v2.html#widgets"><span class="n">5.1</span>Widgets</a>
+  </div>
+  <div class="vtools"><button class="reset" id="restart" title="Restart this scenario (R)">↺ Restart</button></div>
 </nav>
 <p class="caption" id="caption"></p>
 
@@ -358,6 +443,63 @@ h1 .g{color:var(--grey-t)}
     <div class="toast" id="toast"></div>
   </section>
 
+
+  <!-- ============ 5. WIDGETS ============ -->
+  <section class="screen" id="widgets">
+    <div class="hs">
+      <!-- small: speak -->
+      <div>
+        <div class="wg w-s" data-open="speak" id="wSpeak">
+          <div class="wtop"><div class="sym" data-sym="speak"></div><span class="wlev"><span class="dot" style="background:var(--speak)"></span>Low</span></div>
+          <div class="wt">Advance tax</div>
+          <div class="wd">8 400 KR · 15 SEP</div>
+          <div class="wact"><button class="wmic" id="wMic" aria-label="Say yes"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button><span id="wMicTxt">Say “yes”</span></div>
+        </div>
+        <div class="wlabel"><b>Taki</b> · speak</div>
+      </div>
+      <!-- regular app icons -->
+      <div>
+        <div class="apps">
+          <div class="app"><i>☏</i><span>Phone</span></div>
+          <div class="app"><i style="font-size:22px;font-weight:600;color:#6d6d69">14</i><span>Calendar</span></div>
+          <div class="app"><i>♪</i><span>Tuner</span></div>
+          <div class="app taki"><i>T</i><span>Taki</span></div>
+        </div>
+      </div>
+      <!-- medium: tap -->
+      <div style="grid-column:span 2">
+        <div class="wg w-m" data-open="tap">
+          <div class="mleft">
+            <div class="wtop"><div class="sym" data-sym="tap"></div><span class="wlev"><span class="dot" style="background:var(--tap)"></span>Middle</span></div>
+            <div class="mbig" id="wVat">6 250 kr</div>
+            <div class="msub">VAT return · due today</div>
+          </div>
+          <div class="mright">
+            <div class="q"><small>1 NEEDS YOU</small>Musikkhuset Bergen, 4 800 kr. Business or private?</div>
+            <div class="wseg" id="wSeg"><button data-wpick="business">Business</button><button data-wpick="private">Private</button></div>
+            <div class="wdone" id="wDone">✓ Checked. Tap to approve →</div>
+          </div>
+        </div>
+        <div class="wlabel"><b>Taki</b> · tap</div>
+      </div>
+      <!-- large: write -->
+      <div style="grid-column:span 2">
+        <div class="wg w-l" data-open="write">
+          <div class="wtop"><div class="sym" data-sym="write"></div><span class="wlev"><span class="dot" style="background:var(--write)"></span>High</span></div>
+          <div class="lq">What do you expect to earn next year, <span>and why?</span></div>
+          <div class="lback">
+            <div><div class="k">LOOKING BACK · 2026</div><div class="v">≈ 310 000 kr</div></div>
+            <div class="mbars"><div style="height:38%"></div><div style="height:30%"></div><div style="height:44%"></div><div style="height:52%"></div><div style="height:48%"></div><div style="height:40%"></div><div style="height:22%"></div><div style="height:66%"></div><div class="hi" style="height:100%"></div><div style="height:70%"></div><div style="height:58%"></div><div style="height:62%"></div></div>
+          </div>
+          <div class="lfield"><span>Write your thoughts…</span><div class="lpen"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#121212" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16v4z"/></svg></div></div>
+          <div class="lfoot">ONCE A YEAR · SAVED TO YOUR DECISION DIARY</div>
+        </div>
+        <div class="wlabel"><b>Taki</b> · write</div>
+      </div>
+    </div>
+    <div class="hs-search">⌕ Search</div>
+  </section>
+
   <div class="home"></div>
 </div>
 
@@ -389,14 +531,15 @@ function paintSymbols(root=document){ root.querySelectorAll('[data-sym]').forEac
 paintSymbols();
 
 /* ---------------- navigation ---------------- */
-const BG = {speak:'var(--screen)', tap:'var(--screen)', write:'var(--screen)', oversight:'var(--screen)'};
+const BG = {speak:'var(--screen)', tap:'var(--screen)', write:'var(--screen)', oversight:'var(--screen)', widgets:'var(--screen)'};
 const captions = {
   speak:'<b>Low effort: speak.</b> A fixed payment with nothing to decide. Taki tells Magnus, and he answers without looking up from his workbench. Press the mic to answer.',
   tap:'<b>Middle effort: tap.</b> Taki prepares the VAT return, but Magnus looks at the screen and checks one unusual receipt before approving.',
   write:'<b>High effort: write.</b> Only Magnus can answer this. He looks back at his year and writes what he expects next year, and why.',
+  widgets:'<b>Widgets.</b> The three levels on the home screen. The more effort a task needs, the more space it gets: small to <b>speak</b>, medium to <b>tap</b>, large to <b>write</b>. Tap a widget to open it.',
   oversight:'<b>Oversight.</b> Every task Taki has done. Drag a task between Speak, Tap and Write to decide how involved you want to be next time.'
 };
-const screens = ['speak','tap','write','oversight'];
+const screens = ['speak','tap','write','oversight','widgets'];
 let current = 'speak';
 function go(id){
   current = id;
@@ -405,21 +548,23 @@ function go(id){
   document.getElementById('phone').style.background = BG[id];
   document.getElementById('caption').innerHTML = captions[id];
   try{ history.replaceState(null,'','#'+id) }catch(e){}
+  document.querySelectorAll('.vlink').forEach(a=>a.classList.toggle('peer', a.dataset.k===id));
   if(id==='speak') startSpeak(); else stopSpeak();
 }
 document.querySelectorAll('.control [data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go)));
 document.getElementById('restart').addEventListener('click',()=>restart());
 document.addEventListener('keydown',e=>{
   if(e.target.tagName==='TEXTAREA') return;
-  if(['1','2','3','4'].includes(e.key)) go(screens[+e.key-1]);
-  if(e.key==='ArrowRight') go(screens[(screens.indexOf(current)+1)%4]);
-  if(e.key==='ArrowLeft') go(screens[(screens.indexOf(current)+3)%4]);
+  if(['1','2','3','4','5'].includes(e.key)) go(screens[+e.key-1]);
+  if(e.key==='ArrowRight') go(screens[(screens.indexOf(current)+1)%screens.length]);
+  if(e.key==='ArrowLeft') go(screens[(screens.indexOf(current)+screens.length-1)%screens.length]);
   if(e.key==='r'||e.key==='R') restart();
 });
 function restart(){
   if(current==='speak') startSpeak();
   if(current==='tap') resetTap();
   if(current==='write') resetWrite();
+  if(current==='widgets') resetWidgets();
   if(current==='oversight'){ placeTasks(true); toast('Reset to Taki’s suggestion.'); }
 }
 
@@ -596,10 +741,41 @@ function attachDrag(el){
   });
 }
 
+
+/* ---------------- 5. WIDGETS ---------------- */
+let wTimers=[];
+function resetWidgets(){
+  wTimers.forEach(clearTimeout); wTimers=[];
+  const m=document.getElementById('wMic'); m.classList.remove('listen'); m.style.display='';
+  document.getElementById('wMicTxt').textContent='Say “yes”';
+  document.getElementById('wSeg').style.display=''; document.getElementById('wDone').classList.remove('on');
+  document.getElementById('wVat').textContent='6 250 kr';
+}
+document.getElementById('wMic').addEventListener('click',e=>{
+  e.stopPropagation();
+  const m=e.currentTarget, t=document.getElementById('wMicTxt');
+  if(m.classList.contains('listen')) return;
+  m.classList.add('listen'); t.textContent='Listening…';
+  wTimers.push(setTimeout(()=>{ m.classList.remove('listen'); m.style.display='none'; t.innerHTML='<span style="color:var(--speak)">✓</span> Paid'; },1300));
+});
+document.querySelectorAll('[data-wpick]').forEach(b=>b.addEventListener('click',e=>{
+  e.stopPropagation();
+  const amt = b.dataset.wpick==='business' ? '6 250 kr' : '7 210 kr';
+  document.getElementById('wVat').textContent=amt;
+  document.getElementById('wSeg').style.display='none';
+  document.getElementById('wDone').classList.add('on');
+  // carry the choice into the full Tap screen
+  resetTap(); document.querySelector(`[data-pick="${b.dataset.wpick}"]`).click();
+}));
+document.querySelectorAll('.wg[data-open]').forEach(w=>w.addEventListener('click',()=>go(w.dataset.open)));
+
 /* ---------------- start ---------------- */
 placeTasks(false);
 const startAt = (location.hash||'').slice(1);
 go(screens.includes(startAt) ? startAt : 'speak');
+// links like v2.html#tap would otherwise scroll down to the screen; keep the menu in view
+try{ history.scrollRestoration='manual' }catch(e){}
+window.scrollTo(0,0); window.addEventListener('load',()=>setTimeout(()=>window.scrollTo(0,0),0));
 </script>
 </body>
 </html>
