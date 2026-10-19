@@ -100,6 +100,7 @@ h1 span{color:var(--grey-t)}
 .w .list div{font-size:12px;line-height:1.3;padding-top:7px;border-top:1px solid rgba(0,0,0,.08)}
 .w.l .big{margin-top:12px}
 .w.m .big{font-size:25px;white-space:nowrap}
+.w.s .big{font-size:26px;white-space:nowrap}
 .w .x,.w .sz{position:absolute;top:6px;width:22px;height:22px;border-radius:50%;border:0;background:rgba(0,0,0,.6);color:#fff;font:700 11px/22px "Inter Tight",sans-serif;cursor:pointer;opacity:0;transition:opacity .15s;z-index:2;text-align:center}
 .w .x{right:6px}
 .w .sz{right:32px;width:auto;padding:0 7px;border-radius:11px}
@@ -130,7 +131,7 @@ h1 span{color:var(--grey-t)}
   <div class="layout">
     <aside class="lib" id="lib">
       <h2>Widgets</h2>
-      <p class="hint">Drag onto a phone, or tap Anna / Magnus. On the phone: S·M·L changes size, × removes, drag to move or drag off to remove.</p>
+      <p class="hint">Drag onto a phone, or tap Anna / Magnus. On the phone: S·M·L changes size, × removes, drag to move.</p>
       <div class="legend"><span><i style="background:var(--b)"></i>basic</span><span><i style="background:var(--g)"></i>new · sure</span><span><i style="background:var(--y)"></i>new · unsure</span><span><i style="background:var(--r)"></i>new · risky</span></div>
       <div id="libList"></div>
     </aside>
@@ -174,6 +175,11 @@ const I={
  sup:'<path d="M3 21V10l6 4V10l6 4V5h6v16z"/>',
  sea:'<circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/>',
  peer:'<circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M2 20c.8-3.5 3-5 6-5s5.2 1.5 6 5M14 15.5c.6-.3 1.3-.5 2-.5 3 0 5.2 1.5 6 5"/>',
+ post:'<path d="M4 4h16v16H4z"/><path d="M12 8v8M8 12h8"/>',
+ eye:'<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+ clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+ dm:'<path d="M4 5h16v11H9l-5 4z"/><circle cx="9" cy="10.5" r=".6"/><circle cx="12" cy="10.5" r=".6"/><circle cx="15" cy="10.5" r=".6"/>',
+ link:'<path d="M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1M14 10a4 4 0 00-5.7 0l-3 3a4 4 0 005.7 5.7l1-1"/>',
  brreg:'<path d="M4 5h16M4 9h16M4 13h10M4 17h10M17 15l3 3-3 3"/>'
 };
 const ico=(k,c)=>'<svg viewBox="0 0 24 24" fill="none" stroke="'+(c||'currentColor')+'" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+I[k]+'</svg>';
@@ -207,6 +213,18 @@ const W=[
   big:'4 of 6',lbl:'mention "fast"',det:'People praise speed. You could charge for express repair.',why:'From: Google reviews · few, messy'},
  {id:'soc',t:'unsure',ic:'soc',name:'Social',idea:'What people care about',size:'s',bg:'#ffeef3',ink:'#121212',acc:'#d6336c',
   big:'4×',lbl:'saves on the cello post',det:'Restoration gets attention. Reach is not sales, though.',why:'From: Instagram'},
+ {id:'post',g:'social',t:'unsure',ic:'post',name:'Post today',idea:'Nudge: you have something worth posting',size:'s',bg:'#ffeef3',ink:'#121212',acc:'#d6336c',
+  big:'12 days',lbl:'since your last post',det:'You finished the Kulturskolen violin today. Taki wrote a caption, post the photo?',why:'From: Instagram + calendar',
+  list:['Draft: “Six violins, ready for the new term.”','Photo: before / after from your camera','Post now · later · skip']},
+ {id:'views',g:'social',t:'unsure',ic:'eye',name:'Views',idea:'How many saw you this week',size:'m',bg:'#ffffff',ink:'#121212',acc:'#d6336c',
+  big:'1 240',lbl:'views this week · +18 %',det:'Repair videos get 3× more views than shop photos.',why:'From: Instagram, Facebook',
+  bars:[[3,'M'],[2,'T'],[9,'W'],[4,'T'],[3,'F'],[6,'S'],[8,'S']]},
+ {id:'when',g:'social',t:'unsure',ic:'clock',name:'Best time',idea:'When to post so people see it',size:'s',bg:'#fff8db',ink:'#121212',acc:'#b88a00',
+  big:'Sun 7 pm',lbl:'your followers are online',det:'Schedule the post for Sunday instead of now?',why:'From: Instagram insights'},
+ {id:'dm',g:'social',t:'unsure',ic:'dm',name:'DMs',idea:'Customers waiting for an answer',size:'s',bg:'#eaf2ff',ink:'#121212',acc:'#2f6fe4',
+  big:'3',lbl:'unanswered · 1 asks for a price',det:'“How much to rehair a bow?” Taki suggests 900 kr from your price list.',why:'From: Instagram, Facebook messages'},
+ {id:'found',g:'social',t:'unsure',ic:'link',name:'Did it pay off?',idea:'Which customers came from social media',size:'m',bg:'#e8f8ee',ink:'#121212',acc:'#1e9e57',
+  big:'2 of 9',lbl:'new customers found you online',det:'≈ 6 400 kr from 3 hours of posting.',why:'From: bookings · estimate'},
  {id:'local',t:'sure',ic:'local',name:'Local',idea:'Events near you change demand',size:'m',bg:'#e8f8ee',ink:'#121212',acc:'#1e9e57',
   big:'3 weeks',lbl:'until Oslo Jazz Festival',det:'Last festival you had 2× more quick repairs the week before.',why:'From: local news + your history'},
  {id:'globe',t:'unsure',ic:'globe',name:'World',idea:'Global changes that hit you later',size:'m',bg:'#f2f2f0',ink:'#121212',acc:'#121212',
@@ -252,7 +270,7 @@ function renderLib(){
    '<div class="mini w" style="'+styleVars(w)+'"><div class="mi">'+ico(w.ic,w.acc)+'</div></div>'+
    '<div class="meta"><b>'+w.name+'</b><span>'+w.idea+'</span><div class="add"><button data-to="anna">+ Anna</button><button data-to="magnus">+ Magnus</button></div></div>'+
    '<i class="dot" style="background:'+TC[w.t]+'"></i></div>').join('');
- document.getElementById('libList').innerHTML=grp('Basic connectors',w=>w.t==='basic')+grp('New connectors',w=>w.t!=='basic');
+ document.getElementById('libList').innerHTML=grp('Basic connectors',w=>w.t==='basic')+grp('New connectors',w=>w.t!=='basic'&&w.g!=='social')+grp('Social media',w=>w.g==='social');
 }
 
 // phones
