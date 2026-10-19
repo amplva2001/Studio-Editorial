@@ -7,22 +7,366 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#e6e6e3;--card:#f8f8f6;--ink:#121212;--soft:rgba(18,18,18,.55);--grey-t:#a9a9a5}
+:root{--bg:#e6e6e3;--card:#f8f8f6;--ink:#121212;--soft:rgba(18,18,18,.55);--line:rgba(18,18,18,.1);--grey-t:#a9a9a5;--mono:"JetBrains Mono",ui-monospace,monospace;
+--g:#1e9e57;--y:#f6c400;--r:#e5484d;--b:#8a8a86}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font-family:"Inter Tight",Inter,system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;padding:56px 16px}
-main{max-width:860px;margin:0 auto}
+html,body{background:var(--bg)}
+body{color:var(--ink);font-family:"Inter Tight",Inter,system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;padding:40px 16px 60px}
+main{max-width:1240px;margin:0 auto}
 .back{font-size:13px;font-weight:500;color:var(--soft);text-decoration:none}
 .back:hover{color:var(--ink)}
-h1{font-size:52px;font-weight:700;letter-spacing:-.04em;line-height:.95;margin:22px 0 10px}
+header.top{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin:18px 0 28px}
+h1{font-size:48px;font-weight:700;letter-spacing:-.04em;line-height:.95}
 h1 span{color:var(--grey-t)}
-.lead{font-size:16px;color:var(--soft);max-width:520px;line-height:1.45}
+.lead{font-size:15px;color:var(--soft);max-width:520px;line-height:1.45;margin-top:10px}
+.tools{display:flex;gap:8px}
+.btn{font:600 13px/1 "Inter Tight",sans-serif;padding:10px 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.btn:hover{background:#fff}
+
+.layout{display:grid;grid-template-columns:340px 1fr;gap:28px;align-items:start}
+@media (max-width:980px){.layout{grid-template-columns:1fr}}
+
+/* library */
+.lib{background:var(--card);border-radius:26px;padding:18px;position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto}
+@media (max-width:980px){.lib{position:static;max-height:none}}
+.lib h2{font-size:18px;font-weight:700;letter-spacing:-.02em}
+.lib .hint{font-size:12.5px;color:var(--soft);margin:4px 0 12px;line-height:1.4}
+.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:11px;font-family:var(--mono);color:var(--soft);margin-bottom:14px}
+.legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:0}
+.grp{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin:16px 0 8px}
+.item{display:flex;gap:10px;align-items:center;padding:8px;border-radius:16px;border:1px solid transparent;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
+.item:hover{background:#fff;border-color:var(--line)}
+.item .mini{flex:0 0 auto}
+.item .meta{flex:1;min-width:0}
+.item .meta b{display:block;font-size:13.5px;font-weight:600}
+.item .meta span{display:block;font-size:12px;color:var(--soft);line-height:1.35;margin-top:2px}
+.item .dot{width:8px;height:8px;border-radius:50%;flex:0 0 auto}
+.item .add{display:flex;gap:4px;margin-top:6px}
+.item .add button{font:600 11px/1 "Inter Tight",sans-serif;padding:5px 8px;border-radius:999px;border:1px solid var(--line);background:#fff;cursor:pointer}
+.item .add button:hover{background:var(--ink);color:#fff}
+.item.used .meta b::after{content:" ·  on screen";font-weight:500;color:var(--soft);font-size:11px}
+
+/* phones */
+.phones{display:flex;gap:28px;justify-content:center;flex-wrap:wrap}
+.who{width:320px}
+.who h3{font-size:26px;font-weight:700;letter-spacing:-.03em}
+.who p{font-size:13px;color:var(--soft);line-height:1.4;margin:4px 0 12px;min-height:36px}
+.count{font-family:var(--mono);font-size:11px;color:var(--soft);margin-top:10px;text-align:center}
+.phone{width:320px;height:660px;border-radius:52px;background:#111;padding:10px;box-shadow:0 20px 50px rgba(0,0,0,.18)}
+.scr{position:relative;width:100%;height:100%;border-radius:43px;overflow:hidden;display:flex;flex-direction:column}
+.scr.anna{background:linear-gradient(160deg,#f7c7b6 0%,#f3a9a0 35%,#d98fb3 70%,#a98bd6 100%)}
+.scr.magnus{background:linear-gradient(160deg,#5b6ee8 0%,#4b8fe0 40%,#38b8b0 75%,#7fd17a 100%)}
+.status{display:flex;justify-content:space-between;align-items:center;padding:16px 26px 0;color:#fff;font-weight:600;font-size:14px;height:44px}
+.status .island{position:absolute;left:50%;top:10px;transform:translateX(-50%);width:96px;height:28px;border-radius:20px;background:#000}
+.status .sig{display:flex;gap:5px;align-items:center}
+.status .sig i{display:block;width:22px;height:11px;border:1.5px solid #fff;border-radius:3px;position:relative}
+.status .sig i::after{content:"";position:absolute;inset:1.5px 5px 1.5px 1.5px;background:#fff;border-radius:1px}
+.grid{flex:1;display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:57px;grid-auto-flow:row dense;gap:13px;padding:16px 18px 0;align-content:start;position:relative}
+.empty{position:absolute;inset:16px 18px auto;height:420px;border:2px dashed rgba(255,255,255,.55);border-radius:24px;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;font-size:14px;font-weight:600;padding:30px;pointer-events:none;text-shadow:0 1px 6px rgba(0,0,0,.15)}
+.scr.over .grid{outline:3px solid rgba(255,255,255,.9);outline-offset:-6px;border-radius:30px}
+.marker{grid-column:span 2;grid-row:span 2;border-radius:22px;border:2px dashed rgba(255,255,255,.9);background:rgba(255,255,255,.18)}
+.marker.m{grid-column:span 4}
+.marker.l{grid-column:span 4;grid-row:span 4}
+.dots{display:flex;gap:6px;justify-content:center;padding:8px 0}
+.dots i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.5)}
+.dots i:first-child{background:#fff}
+.dock{margin:0 12px 12px;height:84px;border-radius:32px;background:rgba(255,255,255,.3);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;justify-content:space-around;align-items:center;padding:0 10px}
+.dock span{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center}
+.dock svg{width:30px;height:30px}
+.flash{position:absolute;left:18px;right:18px;bottom:110px;background:#121212;color:#fff;font-size:13px;font-weight:600;border-radius:16px;padding:12px 14px;text-align:center;opacity:0;transform:translateY(8px);transition:.2s;pointer-events:none;z-index:5}
+.flash.on{opacity:1;transform:none}
+
+/* widgets */
+.w{position:relative;border-radius:22px;padding:12px 13px;overflow:hidden;display:flex;flex-direction:column;color:var(--wink);background:var(--wbg);box-shadow:0 2px 10px rgba(0,0,0,.08)}
+.w.s{grid-column:span 2;grid-row:span 2}
+.w.m{grid-column:span 4;grid-row:span 2}
+.w.l{grid-column:span 4;grid-row:span 4}
+.w .hd{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;opacity:.8}
+.w .hd svg{width:15px;height:15px;flex:0 0 auto;border-radius:4px}
+.w .hd .src{margin-left:auto;font-family:var(--mono);font-size:9px;font-weight:500;opacity:.8;text-transform:uppercase;letter-spacing:.04em}
+.w .big{font-size:30px;font-weight:700;letter-spacing:-.03em;line-height:1;margin-top:auto;color:var(--wacc)}
+.w .lbl{font-size:12px;font-weight:600;line-height:1.2;margin-top:4px}
+.w.m .row{display:flex;gap:14px;flex:1;margin-top:6px}
+.w.m .row>div{flex:1;display:flex;flex-direction:column;min-width:0}
+.w .det{font-size:12px;line-height:1.3;opacity:.8;margin-top:auto}
+.w .why{font-size:10.5px;line-height:1.3;opacity:.6;margin-top:6px;font-family:var(--mono)}
+.w .bars{display:flex;align-items:flex-end;gap:4px;height:64px;margin-top:auto}
+.w .bars div{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;height:100%;justify-content:flex-end}
+.w .bars b{display:block;width:100%;border-radius:4px;background:var(--wacc);opacity:.85}
+.w .bars b.f{opacity:.35;background:repeating-linear-gradient(45deg,var(--wacc) 0 3px,transparent 3px 6px);border:1px solid var(--wacc)}
+.w .bars small{font-size:8.5px;font-family:var(--mono);opacity:.6}
+.w.l .bars{height:110px;margin-top:12px}
+.w .list{margin-top:10px;display:flex;flex-direction:column;gap:7px}
+.w .list div{font-size:12px;line-height:1.3;padding-top:7px;border-top:1px solid rgba(0,0,0,.08)}
+.w.l .big{margin-top:12px}
+.w.m .big{font-size:25px;white-space:nowrap}
+.w .x,.w .sz{position:absolute;top:6px;width:22px;height:22px;border-radius:50%;border:0;background:rgba(0,0,0,.6);color:#fff;font:700 11px/22px "Inter Tight",sans-serif;cursor:pointer;opacity:0;transition:opacity .15s;z-index:2;text-align:center}
+.w .x{right:6px}
+.w .sz{right:32px;width:auto;padding:0 7px;border-radius:11px}
+.grid .w{cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
+.grid .w:hover .x,.grid .w:hover .sz{opacity:1}
+@media (hover:none){.grid .w .x,.grid .w .sz{opacity:.85}}
+.lib .w{width:66px;height:66px;padding:8px;border-radius:15px;box-shadow:none}
+.lib .w .mi{margin:auto;width:30px;height:30px}
+.lib .w .mi svg{width:100%;height:100%}
+
+.ghost{position:fixed;z-index:100;pointer-events:none;transform:rotate(-2deg) scale(1.02);box-shadow:0 18px 40px rgba(0,0,0,.25);opacity:.95}
+.grid .w.drag{opacity:.25}
 </style>
 </head>
 <body>
 <main>
   <a class="back" href="../">← Studio Editorial</a>
-  <h1>Taki Oracle<br><span>v2</span></h1>
-  <p class="lead">New prototype, coming soon.</p>
+  <header class="top">
+    <div>
+      <h1>Taki Oracle<br><span>v2 · Home screens</span></h1>
+      <p class="lead">Two people, two empty home screens. Each widget is one idea from a connector. Drag them onto Anna's or Magnus's phone to make their Taki.</p>
+    </div>
+    <div class="tools">
+      <button class="btn" id="reset">Clear both</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="lib" id="lib">
+      <h2>Widgets</h2>
+      <p class="hint">Drag onto a phone, or tap Anna / Magnus. On the phone: S·M·L changes size, × removes, drag to move or drag off to remove.</p>
+      <div class="legend"><span><i style="background:var(--b)"></i>basic</span><span><i style="background:var(--g)"></i>new · sure</span><span><i style="background:var(--y)"></i>new · unsure</span><span><i style="background:var(--r)"></i>new · risky</span></div>
+      <div id="libList"></div>
+    </aside>
+
+    <section class="phones">
+      <div class="who">
+        <h3>Anna</h3>
+        <p>Doesn't want to do anything. Wants to live her life and just survive.</p>
+        <div class="phone"><div class="scr anna" data-p="anna"></div></div>
+        <div class="count" id="c-anna"></div>
+      </div>
+      <div class="who">
+        <h3>Magnus</h3>
+        <p>Wants control, to learn and to grow. Maybe hire someone.</p>
+        <div class="phone"><div class="scr magnus" data-p="magnus"></div></div>
+        <div class="count" id="c-magnus"></div>
+      </div>
+    </section>
+  </div>
 </main>
+
+<script>
+const TAKI_PATH='M7.22 8.33 L6.94 9.03 L6.94 20.56 L7.36 21.67 L8.06 22.22 L39.72 22.22 L41.81 22.64 L42.64 23.75 L42.64 25.28 L41.53 30.83 L39.58 35.28 L37.36 38.47 L33.19 42.08 L30.14 43.61 L25.14 45.14 L14.72 46.11 L9.03 45.83 L7.50 46.67 L7.08 47.78 L7.08 59.03 L8.06 60.28 L21.81 60.42 L25.28 60.14 L32.36 58.47 L40.97 54.44 L42.22 54.58 L42.78 55.83 L41.39 63.89 L39.86 67.08 L37.36 70.42 L32.92 74.44 L28.19 76.67 L22.78 77.92 L18.75 78.33 L8.89 78.19 L7.50 78.75 L7.08 79.58 L7.08 91.11 L7.78 92.36 L9.72 92.78 L23.61 92.36 L27.50 91.94 L32.64 90.69 L36.67 89.17 L41.53 86.25 L44.03 84.31 L49.58 78.89 L50.56 78.89 L51.25 79.31 L54.86 83.19 L59.17 86.67 L63.75 89.31 L67.92 90.83 L72.78 92.08 L80.69 92.78 L90.83 92.78 L92.64 92.08 L93.06 90.97 L93.06 79.86 L92.64 78.75 L91.67 78.19 L82.50 78.33 L77.50 77.92 L71.67 76.67 L67.08 74.31 L63.61 71.39 L60.42 67.08 L58.47 62.64 L57.36 55.28 L58.06 54.03 L59.17 54.03 L63.06 56.11 L68.47 58.33 L75.69 60.00 L80.83 60.28 L91.67 60.14 L92.78 59.44 L93.06 58.61 L93.06 47.22 L92.78 46.25 L91.53 45.42 L83.33 45.69 L74.86 45.00 L70.14 43.47 L67.36 41.94 L64.44 39.58 L62.22 37.22 L60.28 34.31 L58.33 29.58 L57.50 25.42 L57.50 23.61 L58.47 22.50 L60.28 22.22 L90.83 22.36 L92.50 22.08 L93.19 21.53 L93.61 20.42 L93.61 9.03 L93.19 8.19 L91.81 7.64 L8.33 7.64Z';
+const TAKI='<svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#121212"/><g transform="translate(24 24) scale(.52)"><path fill="#f3f3f1" fill-rule="evenodd" d="'+TAKI_PATH+'"/></g></svg>';
+
+// simple line icons (24x24)
+const I={
+ bank:'<path d="M3 10h18M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18M12 3l9 5H3z"/>',
+ tax:'<path d="M7 3h7l5 5v13H7zM14 3v5h5M10 13h6M10 17h6"/>',
+ inv:'<path d="M6 3h12v18l-3-2-3 2-3-2-3 2zM9 8h6M9 12h6M9 16h3"/>',
+ cam:'<path d="M3 8h4l2-3h6l2 3h4v11H3z"/><circle cx="12" cy="13" r="3.5"/>',
+ mail:'<path d="M3 6h18v12H3zM3 7l9 6 9-6"/>',
+ sms:'<path d="M4 5h16v11H9l-5 4z"/><path d="M8 10h8"/>',
+ cal:'<path d="M4 6h16v14H4zM4 10h16M8 3v5M16 3v5"/>',
+ pay:'<path d="M3 6h18v12H3zM3 10h18M7 15h4"/>',
+ acct:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 4-7 8-7s7 2 8 7"/>',
+ rev:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',
+ soc:'<path d="M12 20s-8-4.6-8-10a4.5 4.5 0 018-2.8A4.5 4.5 0 0120 10c0 5.4-8 10-8 10z"/>',
+ local:'<path d="M12 21s-7-6.2-7-11.5a7 7 0 0114 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
+ globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/>',
+ sup:'<path d="M3 21V10l6 4V10l6 4V5h6v16z"/>',
+ sea:'<circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/>',
+ peer:'<circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M2 20c.8-3.5 3-5 6-5s5.2 1.5 6 5M14 15.5c.6-.3 1.3-.5 2-.5 3 0 5.2 1.5 6 5"/>',
+ brreg:'<path d="M4 5h16M4 9h16M4 13h10M4 17h10M17 15l3 3-3 3"/>'
+};
+const ico=(k,c)=>'<svg viewBox="0 0 24 24" fill="none" stroke="'+(c||'currentColor')+'" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+I[k]+'</svg>';
+
+// each widget = one idea. t: basic | sure | unsure | risky
+const W=[
+ {id:'bank',t:'basic',ic:'bank',name:'Bank',idea:'Cash flow: when money runs low',size:'m',bg:'#ffffff',ink:'#121212',acc:'#1e9e57',
+  big:'14 Dec',lbl:'Money lasts until',det:'After VAT and rent, you have about 7 weeks of buffer.',why:'From: your bank account',
+  bars:[[18,'Oct'],[21,'Nov'],[12,'Dec'],[9,'Jan',1],[14,'Feb',1]]},
+ {id:'tax',t:'basic',ic:'tax',name:'Skatteetaten',idea:'Next deadline and what it costs',size:'s',bg:'#ffffff',ink:'#121212',acc:'#121212',
+  big:'10 Nov',lbl:'VAT due · 12 400 kr',det:'Taki has it ready. You just approve.',why:'From: Altinn',
+  list:['VAT · 10 Nov · 12 400 kr','Tax prepayment · 15 Nov · 6 800 kr','Annual accounts · 31 May']},
+ {id:'inv',t:'basic',ic:'inv',name:'Invoices',idea:'Unpaid invoices coming due',size:'s',bg:'#fff1e9',ink:'#121212',acc:'#ff5b26',
+  big:'3',lbl:'unpaid · 18 400 kr',det:'Kulturskolen is 12 days late. Send a reminder?',why:'From: EHF invoices',
+  list:['Kulturskolen · 9 200 kr · 12 days late','Ola N. · 4 700 kr · due Fri','Oslo Strykere · 4 500 kr · due 2 Nov']},
+ {id:'cam',t:'basic',ic:'cam',name:'Receipts',idea:'Reports when a receipt is unclear',size:'s',bg:'#ffffff',ink:'#121212',acc:'#121212',
+  big:'2',lbl:'receipts unclear',det:'The one from Clas Ohlson: tools or private?',why:'From: your camera'},
+ {id:'mail',t:'basic',ic:'mail',name:'Email',idea:'A quote request means a job is coming',size:'m',bg:'#eaf2ff',ink:'#121212',acc:'#2f6fe4',
+  big:'+8 500 kr',lbl:'likely job next month',det:'Kulturskolen asked for a quote on 6 violins. Taki drafted one.',why:'From: your inbox'},
+ {id:'sms',t:'basic',ic:'sms',name:'Messages',idea:'Follow-ups you have not sent',size:'s',bg:'#e8f8ee',ink:'#121212',acc:'#1e9e57',
+  big:'1',lbl:'promise not kept',det:'You told Ola "price by Friday". Send it now?',why:'From: SMS'},
+ {id:'cal',t:'basic',ic:'cal',name:'Calendar',idea:'Booked jobs become future income',size:'m',bg:'#ffffff',ink:'#121212',acc:'#e5484d',
+  big:'21 000 kr',lbl:'booked next week · 4 jobs',det:'Thursday is full. A new job fits Monday.',why:'From: your calendar',
+  bars:[[5,'Mon'],[3,'Tue'],[6,'Wed'],[8,'Thu'],[2,'Fri']]},
+ {id:'pay',t:'basic',ic:'pay',name:'Payments',idea:'Shop sales and patterns',size:'s',bg:'#ffffff',ink:'#121212',acc:'#7a4fe8',
+  big:'3 200 kr',lbl:'Saturday in the shop',det:'Saturdays are 40 % of shop sales.',why:'From: Vipps, card terminal'},
+ {id:'acct',t:'basic',ic:'acct',name:'Accountant',idea:'A human steps in before big choices',size:'s',bg:'#eef2ff',ink:'#121212',acc:'#4f7fe8',
+  big:'Kari',lbl:'can check your year',det:'Hiring is a big step. Want Kari to look first?',why:'From: Taki accountant'},
+
+ {id:'rev',t:'unsure',ic:'rev',name:'Reviews',idea:'What customers really think',size:'s',bg:'#fff8db',ink:'#121212',acc:'#b88a00',
+  big:'4 of 6',lbl:'mention "fast"',det:'People praise speed. You could charge for express repair.',why:'From: Google reviews · few, messy'},
+ {id:'soc',t:'unsure',ic:'soc',name:'Social',idea:'What people care about',size:'s',bg:'#ffeef3',ink:'#121212',acc:'#d6336c',
+  big:'4×',lbl:'saves on the cello post',det:'Restoration gets attention. Reach is not sales, though.',why:'From: Instagram'},
+ {id:'local',t:'sure',ic:'local',name:'Local',idea:'Events near you change demand',size:'m',bg:'#e8f8ee',ink:'#121212',acc:'#1e9e57',
+  big:'3 weeks',lbl:'until Oslo Jazz Festival',det:'Last festival you had 2× more quick repairs the week before.',why:'From: local news + your history'},
+ {id:'globe',t:'unsure',ic:'globe',name:'World',idea:'Global changes that hit you later',size:'m',bg:'#f2f2f0',ink:'#121212',acc:'#121212',
+  big:'+8 %',lbl:'string prices from Germany',det:'Will likely reach your supplier in 2–3 months.',why:'From: news · unsure'},
+ {id:'sup',t:'sure',ic:'sup',name:'Supplier',idea:'Costs up, time for a price review',size:'s',bg:'#e8f8ee',ink:'#121212',acc:'#1e9e57',
+  big:'+12 %',lbl:'materials since your last price change',det:'Your rehair price hasn’t moved in 2 years.',why:'From: supplier invoices'},
+ {id:'sea',t:'sure',ic:'sea',name:'Seasons',idea:'Busy and quiet periods ahead',size:'l',bg:'#ffffff',ink:'#121212',acc:'#1e9e57',
+  big:'March',lbl:'concert season, your busiest month',det:'Keep December light. January is usually slow.',why:'From: your history + calendar',
+  bars:[[9,'N'],[6,'D'],[4,'J'],[7,'F'],[12,'M',1],[10,'A',1]]},
+ {id:'peer',t:'unsure',ic:'peer',name:'Others like you',idea:'Learn from similar businesses',size:'m',bg:'#f1ecff',ink:'#121212',acc:'#7a4fe8',
+  big:'January',lbl:'when repairers like you raise prices',det:'Most raise 5–8 %. Few lose customers.',why:'From: anonymous Taki users'},
+ {id:'brreg',t:'risky',ic:'brreg',name:'New nearby',idea:'A competitor registered nearby',size:'s',bg:'#ffecec',ink:'#121212',acc:'#e5484d',
+  big:'1',lbl:'new repairer in Grünerløkka',det:'Registered last week. Could also be a partner.',why:'From: Brønnøysund · feels like surveillance?'}
+];
+const byId=Object.fromEntries(W.map(w=>[w.id,w]));
+const TC={basic:'var(--b)',sure:'var(--g)',unsure:'var(--y)',risky:'var(--r)'};
+const UNITS={s:4,m:8,l:16}, CAP=24;
+const KEY='taki-oracle-v2-home';
+
+let state={anna:[],magnus:[]};
+try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.anna&&s.magnus)state=s}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}};
+
+function bars(d){const mx=Math.max(...d.map(x=>x[0]));return '<div class="bars">'+d.map(x=>'<div><b class="'+(x[2]?'f':'')+'" style="height:'+Math.max(6,x[0]/mx*100)+'%"></b><small>'+x[1]+'</small></div>').join('')+'</div>'}
+function widgetHTML(w,size){
+ const hd='<div class="hd">'+TAKI+'<span>'+w.name+'</span></div>';
+ if(size==='s')return hd+'<div class="big">'+w.big+'</div><div class="lbl">'+w.lbl+'</div>';
+ if(size==='m'){
+   const right=w.bars?bars(w.bars):'<div class="det">'+w.det+'</div><div class="why">'+w.why+'</div>';
+   return hd+'<div class="row"><div><div class="big">'+w.big+'</div><div class="lbl">'+w.lbl+'</div></div><div>'+right+'</div></div>';
+ }
+ let extra=w.bars?bars(w.bars):'';
+ if(w.list)extra+='<div class="list">'+w.list.map(x=>'<div>'+x+'</div>').join('')+'</div>';
+ return hd+'<div class="big">'+w.big+'</div><div class="lbl">'+w.lbl+'</div><div class="det" style="margin-top:10px">'+w.det+'</div>'+extra+'<div class="why" style="margin-top:auto;padding-top:8px">'+w.why+'</div>';
+}
+function styleVars(w){return '--wbg:'+w.bg+';--wink:'+w.ink+';--wacc:'+w.acc}
+
+// library
+function renderLib(){
+ const used=new Set([...state.anna,...state.magnus].map(x=>x.id));
+ const grp=(title,f)=>'<div class="grp">'+title+'</div>'+W.filter(f).map(w=>
+  '<div class="item'+(used.has(w.id)?' used':'')+'" data-id="'+w.id+'">'+
+   '<div class="mini w" style="'+styleVars(w)+'"><div class="mi">'+ico(w.ic,w.acc)+'</div></div>'+
+   '<div class="meta"><b>'+w.name+'</b><span>'+w.idea+'</span><div class="add"><button data-to="anna">+ Anna</button><button data-to="magnus">+ Magnus</button></div></div>'+
+   '<i class="dot" style="background:'+TC[w.t]+'"></i></div>').join('');
+ document.getElementById('libList').innerHTML=grp('Basic connectors',w=>w.t==='basic')+grp('New connectors',w=>w.t!=='basic');
+}
+
+// phones
+const DOCK='<div class="dock">'+
+ '<span style="background:#34c759">'+ico('sms','#fff')+'</span>'+
+ '<span style="background:#fff">'+ico('globe','#2f6fe4')+'</span>'+
+ '<span style="background:#121212;padding:0;overflow:hidden">'+TAKI.replace('<svg','<svg style="width:56px;height:56px"')+'</span>'+
+ '<span style="background:#34c759">'+'<svg viewBox="0 0 24 24" fill="#fff"><path d="M6.6 10.8a15 15 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.6 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.6 3.6a1 1 0 01-.25 1z"/></svg></span></div>';
+function units(p){return state[p].reduce((a,x)=>a+UNITS[x.size],0)}
+function renderPhone(p){
+ const scr=document.querySelector('.scr[data-p="'+p+'"]');
+ const items=state[p].map((x,i)=>{const w=byId[x.id];return '<div class="w '+x.size+'" data-i="'+i+'" style="'+styleVars(w)+'">'+widgetHTML(w,x.size)+'<button class="sz" data-sz>'+x.size.toUpperCase()+'</button><button class="x" data-x>×</button></div>'}).join('');
+ scr.innerHTML='<div class="status"><span>9:41</span><div class="island"></div><span class="sig">'+ico('globe','#fff').replace('<svg','<svg width="15" height="15"')+'<i></i></span></div>'+
+  '<div class="grid">'+items+(state[p].length?'':'<div class="empty">Empty. Drag widgets here to build '+(p==='anna'?'Anna’s':'Magnus’s')+' Taki.</div>')+'</div>'+
+  '<div class="dots"><i></i><i></i></div>'+DOCK+'<div class="flash"></div>';
+ document.getElementById('c-'+p).textContent=state[p].length+' widget'+(state[p].length===1?'':'s')+' · '+units(p)+'/'+CAP+' space used';
+}
+function renderAll(){renderLib();renderPhone('anna');renderPhone('magnus');save()}
+function flash(p,msg){const f=document.querySelector('.scr[data-p="'+p+'"] .flash');if(!f)return;f.textContent=msg;f.classList.add('on');clearTimeout(f._t);f._t=setTimeout(()=>f.classList.remove('on'),2200)}
+
+function fits(p,extra,ignoreIndex){let u=extra;state[p].forEach((x,i)=>{if(i!==ignoreIndex)u+=UNITS[x.size]});return u<=CAP}
+function addTo(p,id,size,at){
+ size=size||byId[id].size;
+ const existing=state[p].findIndex(x=>x.id===id);
+ if(existing>-1){ // move within phone
+   const it=state[p].splice(existing,1)[0];
+   if(at!=null&&at>existing)at--;
+   state[p].splice(at==null?state[p].length:at,0,it);return true;
+ }
+ // try default size, then smaller
+ const order=['l','m','s'];let s=size;
+ while(!fits(p,UNITS[s],-1)){const k=order.indexOf(s);if(k===order.length-1){flash(p,'Screen is full. Remove a widget or make one smaller.');return false}s=order[k+1]}
+ if(s!==size)flash(p,'Not enough space, added as '+(s==='s'?'small':'medium')+'.');
+ state[p].splice(at==null?state[p].length:at,0,{id,size:s});return true;
+}
+
+// clicks
+document.addEventListener('click',e=>{
+ const to=e.target.closest('[data-to]');
+ if(to){const id=to.closest('.item').dataset.id;addTo(to.dataset.to,id);renderAll();return}
+ const x=e.target.closest('[data-x]');
+ if(x){const p=x.closest('.scr').dataset.p,i=+x.closest('.w').dataset.i;state[p].splice(i,1);renderAll();return}
+ const sz=e.target.closest('[data-sz]');
+ if(sz){const p=sz.closest('.scr').dataset.p,i=+sz.closest('.w').dataset.i,it=state[p][i];
+   const cyc=['s','m','l'];let k=cyc.indexOf(it.size);
+   for(let n=1;n<=3;n++){const s=cyc[(k+n)%3];if(fits(p,UNITS[s],i)){it.size=s;break}}
+   renderAll();return}
+});
+document.getElementById('reset').onclick=()=>{state={anna:[],magnus:[]};renderAll()};
+
+// drag (pointer events: mouse + touch)
+let drag=null;
+document.addEventListener('pointerdown',e=>{
+ if(e.button>0||e.target.closest('button'))return;
+ const item=e.target.closest('.item'), pw=e.target.closest('.grid .w');
+ if(!item&&!pw)return;
+ let src,el;
+ if(item){src={from:'lib',id:item.dataset.id};el=item.querySelector('.mini')}
+ else{const p=pw.closest('.scr').dataset.p,i=+pw.dataset.i;src={from:p,i,id:state[p][i].id,size:state[p][i].size};el=pw}
+ drag={src,el,x0:e.clientX,y0:e.clientY,on:false,pid:e.pointerId};
+});
+document.addEventListener('pointermove',e=>{
+ if(!drag)return;
+ if(!drag.on){if(Math.hypot(e.clientX-drag.x0,e.clientY-drag.y0)<6)return;start(e)}
+ e.preventDefault();
+ const g=drag.ghost;g.style.left=(e.clientX-drag.ox)+'px';g.style.top=(e.clientY-drag.oy)+'px';
+ const t=document.elementFromPoint(e.clientX,e.clientY);
+ const scr=t&&t.closest('.scr');
+ document.querySelectorAll('.scr.over').forEach(s=>{if(s!==scr)s.classList.remove('over')});
+ document.querySelectorAll('.marker').forEach(m=>m.remove());
+ drag.target=null;
+ if(scr){scr.classList.add('over');
+   const p=scr.dataset.p,grid=scr.querySelector('.grid');
+   const over=t.closest('.grid .w');let at=null;
+   if(over&&!over.classList.contains('drag'))at=+over.dataset.i;
+   const size=drag.src.size||byId[drag.src.id].size;
+   const m=document.createElement('div');m.className='marker '+size;
+   if(at!=null)grid.insertBefore(m,over);else{const em=grid.querySelector('.empty');if(em)em.style.display='none';grid.appendChild(m)}
+   drag.target={p,at};
+ }
+},{passive:false});
+function start(e){
+ drag.on=true;
+ const r=drag.el.getBoundingClientRect();
+ let g;
+ if(drag.src.from==='lib'){ // ghost shows the real widget
+   const w=byId[drag.src.id];g=document.createElement('div');g.className='w '+w.size;g.style.cssText=styleVars(w);
+   const wd={s:128,m:270,l:270}[w.size],ht={s:128,m:128,l:270}[w.size];
+   g.style.width=wd+'px';g.style.height=ht+'px';g.innerHTML=widgetHTML(w,w.size);
+   drag.ox=wd/2;drag.oy=30;
+ }else{g=drag.el.cloneNode(true);g.style.width=r.width+'px';g.style.height=r.height+'px';drag.ox=e.clientX-r.left;drag.oy=e.clientY-r.top;drag.el.classList.add('drag')}
+ g.classList.add('ghost');document.body.appendChild(g);drag.ghost=g;
+ document.body.style.cursor='grabbing';
+}
+function end(){
+ if(!drag)return;
+ if(drag.on){
+   drag.ghost.remove();document.body.style.cursor='';
+   document.querySelectorAll('.scr.over').forEach(s=>s.classList.remove('over'));
+   document.querySelectorAll('.marker').forEach(m=>m.remove());
+   const s=drag.src,t=drag.target;
+   if(t){
+     if(s.from==='lib')addTo(t.p,s.id,null,t.at);
+     else if(s.from===t.p){const it=state[s.from].splice(s.i,1)[0];let at=t.at;if(at!=null&&at>s.i)at--;state[t.p].splice(at==null?state[t.p].length:at,0,it)}
+     else{const it=state[s.from][s.i];if(addTo(t.p,it.id,it.size,t.at)){const k=state[s.from].indexOf(it);if(k>-1)state[s.from].splice(k,1)}}
+   }else if(s.from!=='lib'){state[s.from].splice(s.i,1)} // dropped outside a phone = remove
+   renderAll();
+ }
+ drag=null;
+}
+document.addEventListener('pointerup',end);
+document.addEventListener('pointercancel',end);
+
+renderAll();
+</script>
 </body>
 </html>
