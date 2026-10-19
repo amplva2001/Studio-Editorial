@@ -22,6 +22,9 @@ main{max-width:1080px;margin:0 auto}
 .top .who{font-size:13px;color:var(--soft)}
 .top .who b{color:var(--ink);font-weight:600}
 
+.vers{display:flex;gap:3px;background:rgba(255,255,255,.5);border-radius:999px;padding:4px}
+.vers a{font-size:13px;font-weight:600;padding:6px 14px;border-radius:999px;color:var(--soft)!important;text-decoration:none}
+.vers a.on{background:var(--ink);color:#f3f3f1!important}
 /* steps */
 .steps{display:flex;gap:4px;flex-wrap:wrap;margin:18px 0 26px;background:rgba(255,255,255,.45);border-radius:999px;padding:5px;width:max-content;max-width:100%}
 .steps button{display:flex;align-items:center;gap:7px;padding:8px 14px 8px 8px;border-radius:999px;font-size:13.5px;font-weight:500;color:#333}
@@ -146,6 +149,7 @@ textarea:focus,input[type=text]:focus{border-color:var(--ink)}
 <main>
   <div class="top">
     <a href="../">← Studio Editorial</a>
+    <div class="vers"><a href="./" class="on">Version 1</a><a href="v2.html">Version 2</a></div>
     <div class="who" id="who">No participant yet</div>
   </div>
 
