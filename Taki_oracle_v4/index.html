@@ -215,6 +215,36 @@ h1 span{color:var(--grey-t)}
 .whyov .from i{width:7px;height:7px;border-radius:50%}
 .whyov .conf{margin-top:10px;font-size:11px;color:var(--soft)}
 .whyov .conf b{color:var(--ink)}
+.w.goalw{background:#f6c400;color:#121212;cursor:pointer}
+.grid .w.goalw{grid-row:span 3}
+.w.goalw .prog{background:rgba(0,0,0,.12)}.w.goalw .prog i{background:#121212}
+.w.goalw .basis{color:rgba(0,0,0,.6)}
+.flag2{margin-left:auto;font:600 10px/1 "Inter Tight",sans-serif;background:#121212;color:#fff;padding:4px 7px;border-radius:999px}
+.ck{display:grid;grid-template-columns:22px 1fr;gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.ck:first-child{border-top:0;padding-top:2px}
+.ck>i{width:22px;height:22px;border-radius:50%;border:2px solid var(--line);font:700 11px/18px sans-serif;text-align:center;font-style:normal}
+.ck.done>i{background:var(--speak);border-color:var(--speak);color:#fff}
+.ck.later>i{border-color:#bbb;color:#888}
+.ck b{display:block;font-size:13px}
+.ck span{display:block;font-size:11.5px;color:var(--soft);line-height:1.35;margin-top:1px}
+.ck .basis span{display:inline;margin:0}
+.ck:has(.basis i.you)>i{border-color:var(--tap)}
+.ck.done:has(.basis i.you)>i{border-color:var(--speak)}
+.tier{display:flex;justify-content:space-between;align-items:center;padding:9px 10px;border-radius:12px;margin-top:6px;background:var(--screen);font-size:13px}
+.tier small{display:block;font-size:11px;color:var(--soft);margin-top:1px}
+.tier b{font-size:15px}
+.tier.g{background:#e3f5ea}.tier.g b{color:var(--speak)}
+.tier.o{background:#ffe9e0}.tier.o b{color:var(--tap)}
+.tier.wt{background:#fff;border:1px dashed var(--line)}
+.finn{background:#fff;border-radius:20px;overflow:hidden;border:1px solid var(--line)}
+.finn .fh{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line);font-size:11px;color:var(--soft)}
+.finn .fl{background:#0063fb;color:#fff;font:800 13px/1 "Inter Tight",sans-serif;padding:6px 9px;border-radius:7px;letter-spacing:.02em}
+.finn .fb{padding:11px 12px}
+.finn .fb b{display:block;font-size:15px}
+.finn .fb span{display:block;font-size:11.5px;color:var(--soft);margin-top:2px}
+.finn .fb p{font-size:12px;line-height:1.4;margin-top:8px}
+.finn .ft{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
+.finn .ft span{font-size:10.5px;background:#e8f0ff;color:#0046b3;padding:4px 7px;border-radius:999px;margin:0}
 .changes{margin-top:14px;padding:12px 14px;border-radius:16px;background:#fff;border:1px solid var(--line);font-size:12.5px;line-height:1.5}
 .changes b{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);display:block;margin-bottom:4px}
 </style>
@@ -350,24 +380,35 @@ const ANNA={
 
 /* ---------------- MAGNUS ---------------- */
 const horn='<svg viewBox="0 0 200 200" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M30 120h70c18 0 26-10 26-24s-8-24-26-24H70c-10 0-16 6-16 14s6 14 16 14h40"/><path d="M126 96l44-36v96l-44-36"/><path d="M84 120v18M96 120v18M108 120v18"/></svg>';
-let hire=1;
-function future(h){const B=[62,58,55,60,66,72],out={none:B.slice(),prob:[],plaus:[],pref:[]};
- B.forEach((b,i)=>{let v=b;if(i>=h){v+=(i>=h+2?20:(i===h+1?10:3))-14}out.prob.push(v);out.plaus.push(i>=h?v-7:v);out.pref.push(i>=h?v+6:v)});return out}
+Object.assign(WHY,{
+ m_season:{k:'Seasons',h:'You have two rush periods: Christmas and 17 May',p:['Nov–Dec: Christmas concerts. Last year 18 repairs in 3 weeks.','Late Apr–May: 17 May. Last year 23 brass instruments in 3 weeks.','Bands book late, so you end up with 70-hour weeks.','An early-bird price moves bookings earlier. A rush price makes last-minute jobs worth it, or lets people choose to wait.'],f:[['taki','Invoices last year'],['you','Your calendar'],['world','Concert season + 17 May']],c:'High'},
+ m_goal:{k:'Goal',h:'Hire an apprentice by August',p:['You set this goal with me in January.','You need about 60 000 kr a month for 3 months in a row to afford a salary.','August means the apprentice is trained before the Christmas concerts.','Tap the goal to see the checklist for hiring in an ENK.'],f:[['you','Our talk in January'],['taki','Your income'],['world','Skatteetaten / Altinn rules']],c:'High'},
+ m_memory:{k:'Memory',h:'Why I remember your rush periods',p:['18 invoices in the 3 weeks before the Christmas concerts.','23 brass invoices between 20 April and 16 May.','Your calendar had no free evenings in either period.','You told me in June: “never again like that”.'],f:[['taki','Invoices'],['you','Calendar'],['you','What you said in June']],c:'High'},
+ m_offer:{k:'Offer',h:'Why these prices',p:['−15 % early: enough to make bands book in February–March instead of May.','+30 % rush: a job on short notice means evenings and moving other customers. Now it pays for that.','Or they can wait until June at normal price. Their choice.','Your margin stays the same on average.'],f:[['taki','Your price list'],['taki','Last year’s bookings'],['you','Your calendar']],c:'Medium'},
+ m_post:{k:'Draft post',h:'Why this post, now',p:['What: the early-bird offer, so bands know about it.','Why: bookings in March free up May, and get you closer to the hiring goal.','When: Sunday 19:00, when your followers are online. I’ll also email the 12 bands from last year.'],f:[['you','Instagram insights'],['taki','Your customer list'],['you','Your camera roll']],c:'Medium'},
+ m_whatif:{k:'What if',h:'How I made these futures',p:['Blue: your normal income, plus 30 % more jobs after 2 months of training, minus salary.','Yellow: same, but a slow autumn.','Green: same, plus the early-bird and rush prices.','Dashed: no hire. Nov–Dec are high because of the Christmas concerts.'],f:[['taki','Your income'],['you','Your calendar'],['world','Apprentice salary rates']],c:'Medium'},
+ m_finn:{k:'Job ad',h:'Why FINN.no',p:['Most job seekers in Norway look for jobs on FINN.no.','I drafted the ad from your goal, your work and the checklist.','Nothing is posted until you say yes.'],f:[['you','Your goal'],['taki','Checklist'],['world','FINN.no']],c:'High'}
+});
+let hire=1,sub=null;
+function future(h){const B=[50,52,56,62,80,86],out={none:B.slice(),prob:[],plaus:[],pref:[]};
+ B.forEach((b,i)=>{let v=b;if(i>=h){const trained=i>=h+2;v+=(trained?Math.round(b*0.3):(i===h+1?6:2))-16}out.prob.push(v);out.plaus.push(i>=h?v-7:v);out.pref.push(i>=h?v+6:v)});return out}
 function chart(){
- const f=future(hire),W=268,H=130,mx=95,mn=35,x=i=>14+i*(W-24)/5,y=v=>H-14-(v-mn)/(mx-mn)*(H-28);
+ const f=future(hire),W=268,H=130,mx=115,mn=30,x=i=>14+i*(W-24)/5,y=v=>H-14-(v-mn)/(mx-mn)*(H-28);
  const line=(a,c,dash,w)=>'<polyline fill="none" stroke="'+c+'" stroke-width="'+(w||2.5)+'" '+(dash?'stroke-dasharray="4 4"':'')+' points="'+a.map((v,i)=>x(i)+','+y(v)).join(' ')+'"/>';
  const band='<polygon fill="rgba(30,158,87,.12)" points="'+f.pref.map((v,i)=>x(i)+','+y(v)).join(' ')+' '+f.plaus.map((v,i)=>x(i)+','+y(v)).reverse().join(' ')+'"/>';
- const goal='<line x1="10" x2="'+(W-6)+'" y1="'+y(60)+'" y2="'+y(60)+'" stroke="#121212" stroke-opacity=".25" stroke-dasharray="2 3"/><text x="'+(W-8)+'" y="'+(y(60)-4)+'" text-anchor="end" font-size="8" font-family="JetBrains Mono" fill="#121212" fill-opacity=".5">goal 60k</text>';
+ const goal='<line x1="10" x2="'+(W-6)+'" y1="'+y(60)+'" y2="'+y(60)+'" stroke="#121212" stroke-opacity=".25" stroke-dasharray="2 3"/><text x="'+(W-8)+'" y="'+(y(60)+10)+'" text-anchor="end" font-size="8" font-family="JetBrains Mono" fill="#121212" fill-opacity=".5">goal 60k</text>';
+ const xmas='<rect x="'+(x(4)-10)+'" y="6" width="'+(x(5)-x(4)+20)+'" height="'+(H-20)+'" fill="#f6c400" opacity=".18" rx="6"/><text x="'+(x(4)-6)+'" y="16" font-size="8" font-family="JetBrains Mono" fill="#8a6d00">Christmas concerts</text>';
  const m=['Jul','Aug','Sep','Oct','Nov','Dec'].map((t,i)=>'<text x="'+x(i)+'" y="'+(H-2)+'" text-anchor="middle" font-size="8" font-family="JetBrains Mono" fill="#121212" fill-opacity=".5">'+t+'</text>').join('');
- const hx='<line x1="'+x(hire)+'" x2="'+x(hire)+'" y1="8" y2="'+(H-14)+'" stroke="#ff5b26" stroke-width="1.5"/><text x="'+(x(hire)+3)+'" y="14" font-size="8" font-family="JetBrains Mono" fill="#ff5b26">hire</text>';
- return '<svg viewBox="0 0 '+W+' '+H+'" width="100%">'+goal+band+line(f.none,'#121212',1,1.5)+line(f.plaus,'#f6c400')+line(f.pref,'#1e9e57')+line(f.prob,'#2f6fe4',0,3)+hx+m+'</svg>';
+ const hx='<line x1="'+x(hire)+'" x2="'+x(hire)+'" y1="8" y2="'+(H-14)+'" stroke="#ff5b26" stroke-width="1.5"/><text x="'+(x(hire)+3)+'" y="'+(H-20)+'" font-size="8" font-family="JetBrains Mono" fill="#ff5b26">hire</text>';
+ return '<svg viewBox="0 0 '+W+' '+H+'" width="100%">'+xmas+goal+band+line(f.none,'#121212',1,1.5)+line(f.plaus,'#f6c400')+line(f.pref,'#1e9e57')+line(f.prob,'#2f6fe4',0,3)+hx+m+'</svg>';
 }
-function whatifText(){const f=future(hire),d=f.prob[5]-f.none[5],mo=['July','August','September','October','November','December'][hire];
- return 'Hire in <b>'+mo+'</b>: by December you’ll likely earn <b>'+(d>=0?'+':'')+d+' 000 kr</b> a month after salary'+(hire>=4?', but May will be chaos again first.':', and get 10 hours a week back.')}
+function whatifText(){const mo=['July','August','September','October','November','December'][hire];
+ if(hire<=2)return 'Hire in <b>'+mo+'</b>: the apprentice is trained <b>before the Christmas concerts</b>. In December you’ll likely earn <b>+'+(future(hire).prob[5]-future(hire).none[5])+' 000 kr</b> more after salary, and get 10 hours a week back.';
+ return 'Hire in <b>'+mo+'</b>: the apprentice is still learning when the <b>Christmas concerts</b> start. You pay a salary, but the rush hits you alone.';}
 
-const magHome=()=>'<div class="grid">'+
- W({size:'m',name:'Seasons',why:'m_season',cls:'urgent',flag:'First',next:1,body:'<div class="row"><div><div class="big">Post now</div><div class="lbl">so May isn’t chaos again</div></div><div>'+bars([[30,'J'],[34,'F'],[48,'M'],[52,'A'],[90,'M','hi'],[40,'J']],'#ffffff')+'</div></div>',basis:['taki','Your invoices last May + your calendar']})+
- W({size:'m',name:'Goal',why:'m_goal',body:'<div class="row"><div><div class="big">August</div><div class="lbl">Hire an apprentice</div></div><div style="justify-content:flex-end"><div class="lbl" style="font-weight:500">60k × 3 months</div><div class="prog"><i style="width:33%"></i></div><div class="lbl" style="font-weight:500;margin-top:8px">10 h/week freed</div><div class="prog"><i style="width:10%"></i></div></div></div>',basis:['you','What we agreed in January']})+
+const goalW=()=>'<div class="w m goalw" data-sub="goal" data-why="m_goal"><div class="hd">'+taki()+'<span>Your goal</span><span class="flag2">Checklist ›</span></div><div class="row"><div><div class="big">August</div><div class="lbl">Hire an apprentice</div></div><div style="justify-content:flex-end"><div class="lbl" style="font-weight:500">60k × 3 months · 1 of 3</div><div class="prog"><i style="width:33%"></i></div><div class="lbl" style="font-weight:500;margin-top:8px">Checklist · 1 of 8</div><div class="prog"><i style="width:12%"></i></div></div></div>'+basis('you','Based on what we agreed in January')+'</div>';
+const magHome=()=>'<div class="grid">'+goalW()+
+ W({size:'m',name:'Seasons',why:'m_season',cls:'urgent',flag:'First',next:1,body:'<div class="row"><div><div class="big">Early-bird</div><div class="lbl">Make an offer now, before the 17 May rush</div></div><div>'+bars([[22,'S'],[30,'O'],[62,'N','hi'],[70,'D','hi'],[20,'J'],[24,'F'],[34,'M'],[40,'A'],[80,'M','hi']],'#ffffff')+'</div></div>',basis:['taki','Your invoices last year + your calendar']})+
  news(NEWS.brass,'m_news','m','Order valve parts now','#1e9e57','Based on the article + what you used last April–May')+
  status('m_status',[
    ['done','I sent 3 invoices to school bands, just so you know.'],
@@ -377,42 +418,68 @@ const magHome=()=>'<div class="grid">'+
  W({size:'s',name:'Accountant',why:'m_acct',body:'<div class="big">Kari</div><div class="lbl">ready when you are</div>',basis:['human','Before big choices']})+
  '</div>';
 
+/* checklist: hiring your first employee in an ENK (check details on Altinn / Skatteetaten) */
+const CHECK=[
+ ['todo','Stable income','60 000 kr a month for 3 months','taki','Taki tracks it · 1 of 3 months'],
+ ['done','Decide what the job is','Apprentice, 100 %, from August','you','You did this in January'],
+ ['todo','Register as an employer','In the Central Coordinating Register, via Altinn','taki','Taki can prepare it · you sign'],
+ ['todo','Tax deduction account','A separate bank account for your employee’s tax (skattetrekkskonto)','you','You · 10 min at your bank'],
+ ['todo','Occupational injury insurance','Required by law (yrkesskadeforsikring)','taki','Taki compares 3 offers'],
+ ['todo','Pension (OTP)','Mandatory occupational pension','human','Kari sets it up'],
+ ['todo','Written employment contract','Required from day one','taki','Taki drafts · you check'],
+ ['todo','Approved training company','To take an apprentice: apply to your county (lærebedrift), and get apprentice support','human','You + Kari'],
+ ['later','Every month after hiring','a-melding, tax deductions, employer’s contribution','taki','Taki does it']
+];
+const goalScreen=()=>'<div class="app">'+apphd('Your goal')+
+ '<div class="w goalw" style="grid-column:auto;box-shadow:none"><div class="hd">'+taki()+'<span>Hire an apprentice</span></div><div class="big" style="margin-top:8px">August</div><div class="lbl">1 of 8 done · trained before the Christmas concerts</div></div>'+
+ say('This is what you need to hire someone in an ENK. I can do most of it. <b>Orange</b> needs you.')+
+ '<div class="card">'+CHECK.map(c=>'<div class="ck '+c[0]+'"><i>'+(c[0]==='done'?'✓':c[0]==='later'?'↻':'')+'</i><div><b>'+c[1]+'</b><span>'+c[2]+'</span>'+basis(c[3],c[4])+'</div></div>').join('')+'</div>'+
+ '<div class="basis" style="padding:0 4px"><i class="world"></i><span>Based on Skatteetaten and Altinn rules for employers. Kari checks it with you.</span></div>'+
+ '<div class="acts">'+act('tap','Let Taki start the paperwork','I’ll ask before I send anything',1)+'</div></div>';
+
+const finnAd='<div class="finn"><div class="fh"><span class="fl">FINN.no</span><span>Job ad · draft</span></div><div class="fb"><b>Apprentice, instrument repair</b><span>Magnus Instrumentverksted · Oslo · from August</span><p>Do you like music and fixing things? Learn to repair strings and brass in a small workshop. We get very busy before the Christmas concerts and 17 May, and that’s where you’ll learn the most.</p><div class="ft"><span>100 %</span><span>Apprenticeship</span><span>Deadline 30 June</span></div></div></div>';
+
 const MAGNUS={
- who:'Magnus, 41',
- desc:'Instrument repairer with an ENK. Strings and brass, and many school bands are his customers. He works 55 hours a week and wants to learn and grow.',
- goal:[['Goal','Hire an apprentice by August'],['KPI','60 000 kr a month for 3 months · 10 hours a week freed'],['Data','His income + calendar + Instagram + what he told Taki + the news']],
- point:'For Magnus the Oracle is a <b>sparring partner</b>. It says what every suggestion is based on, shows <b>why</b> when he holds it, and <b>asks before it starts</b> something new.',
+ who:'Magnus, 27',
+ desc:'Instrument repairer with an ENK. Strings and brass, and many school bands are his customers. Two rush periods a year: the Christmas concerts and 17 May. He works 55 hours a week and wants to learn and grow.',
+ goal:[['Goal','Hire an apprentice by August, trained before the Christmas concerts'],['KPI','60 000 kr a month for 3 months · 10 hours a week freed'],['Data','His income + calendar + Instagram + what he told Taki + the news']],
+ point:'For Magnus the Oracle is a <b>sparring partner</b>. It keeps his goal on top, says what every suggestion is based on, tells him <b>what it will do</b>, and <b>asks before it starts</b>.',
  steps:[
-  {when:'Mon 2 Feb · 07:30',t:'Black = look at this first',p:'Seasons is black: it’s the most pressing thing. Under it: based on last May’s invoices and his calendar. Further down: a news widget with the article’s photo and a clear tip, and what Taki has done, is doing and wants to start. Tap Seasons.',req:['Black = first','Based on…','News with source','Done / Working / Asking'],
+  {when:'Mon 2 Feb · 07:30',t:'Goal on top, black = look first',p:'The yellow goal is always on top: hire by August. Tap it to see the checklist for hiring in an ENK. The black widget is the most pressing thing: make an early-bird offer before the 17 May rush. Tap it.',req:['Goal on top','Checklist','Black = first','Based on…'],
    scr:'home',html:magHome},
-  {when:'07:31',t:'The Oracle remembers last May',p:'Hold the chart to see exactly what it remembers: invoices, his calendar, and what Magnus said in June.',req:['Memory','Hold for why'],
-   html:()=>'<div class="app">'+apphd('Seasons')+say('Last May you repaired <b>23 brass instruments</b> in 3 weeks and worked <b>70-hour weeks</b>. If bands book in April instead, May gets calmer.')+
-   card('Jobs per month, last year','m_memory',['you','Based on your invoices, calendar and what you told me in June'],bars([[11,'Jan'],[12,'Feb'],[16,'Mar'],[18,'Apr'],[41,'May','hi'],[14,'Jun']],'#2f6fe4'))+
-   '<div class="acts">'+act('tap','Show me a draft post','Ready in a second',1)+'</div></div>'},
-  {when:'07:32',t:'A post, ready to go',p:'The draft says what, why and when. Hold it to see the reasoning.',req:['Draft','What · why · when'],
-   html:()=>'<div class="app">'+apphd('Draft post')+'<div class="post" data-why="m_post"><div class="ph">'+horn+'</div><div class="cap"><b>magnus_instrumentverksted</b> Is your band ready for 17 May? 🎺 Book a service before 1 April and get 15 % off for school bands.</div></div>'+
-   '<div class="why"><div><b>What</b>Service offer to school bands</div><div><b>Why</b>Fill April so May isn’t chaos</div><div><b>When</b>Sunday 19:00, followers online</div></div>'+
-   basis('you','Based on your Instagram, price list and camera roll')+
+  {when:'07:31',t:'Two rush periods',p:'The Oracle remembers last year: Christmas concerts and 17 May. Both times bands booked late, and Magnus worked 70-hour weeks.',req:['Memory','Hold for why'],
+   html:()=>'<div class="app">'+apphd('Seasons')+say('You have <b>two rush periods</b>: the Christmas concerts and 17 May. Both times, bands booked late and you worked <b>70-hour weeks</b>.')+
+   card('Jobs per month, last year','m_memory',['you','Based on your invoices, calendar and what you told me in June'],bars([[11,'J'],[12,'F'],[16,'M'],[18,'A'],[41,'M','hi'],[14,'J'],[6,'J'],[10,'A'],[14,'S'],[17,'O'],[30,'N','hi'],[34,'D','hi']],'#2f6fe4'))+
+   '<div class="acts">'+act('tap','What can we do about it?','',1)+'</div></div>'},
+  {when:'07:32',t:'The plan: early-bird and rush price',p:'The Oracle explains exactly what it wants to do. Book early: 15 % off. Book on short notice: 30 % more, because it means evenings and moving other customers. Or wait until June at normal price.',req:['Says what it will do','Pricing by time'],
+   html:()=>'<div class="app">'+apphd('Plan for spring')+say('Here’s what I suggest. I’ll <b>post the offer</b> on Sunday, <b>email the 12 bands</b> from last year, and <b>add the prices</b> to your booking page.')+
+   card('Service price for school bands','m_offer',['taki','Based on your price list and last year’s bookings'],
+    '<div class="tier g"><span>Early-bird<small>Book before 1 April</small></span><b>−15 %</b></div><div class="tier"><span>Normal<small>1 April – 1 May</small></span><b>1 200 kr</b></div><div class="tier o"><span>Rush<small>Less than 2 weeks before 17 May</small></span><b>+30 %</b></div><div class="tier wt"><span>Or wait<small>After 17 May</small></span><b>Normal price</b></div>')+
+   '<div class="acts">'+act('tap','Sounds good, show me the post','',1)+act('write','Change the prices','')+'</div></div>'},
+  {when:'07:33',t:'A post, ready to go',p:'The draft says what, why and when. Magnus edits one word and schedules it.',req:['Draft','What · why · when'],
+   html:()=>'<div class="app">'+apphd('Draft post')+'<div class="post" data-why="m_post"><div class="ph">'+horn+'</div><div class="cap"><b>magnus_instrumentverksted</b> Is your band ready for 17 May? 🎺 Book a service before 1 April and get <b>15 % off</b>. Last-minute repairs in May cost more, so book early!</div></div>'+
+   '<div class="why"><div><b>What</b>Early-bird offer to school bands</div><div><b>Why</b>Fill March so May isn’t chaos</div><div><b>When</b>Sunday 19:00 + email to 12 bands</div></div>'+
+   basis('you','Based on your Instagram, customer list and camera roll')+
    '<div class="acts">'+act('tap','Schedule for Sunday','',1)+act('write','Edit text','')+'</div></div>'},
-  {when:'Mon 9 Mar',t:'“I finished this, just so you know”',p:'The Oracle reports back on its own: the post brought 14 bookings. May is 70 % full, and spread out.',req:['Done, just so you know','Social → money'],
-   html:()=>'<div class="app">'+apphd('Did it pay off?')+say('Just so you know: the post brought <b>14 bookings</b>, about <b>21 000 kr</b>. May is <b>70 % full</b>.')+
-   card('May, booked so far','m_payoff',['you','Based on bookings that came from the post'],'<div class="heat">'+[.9,.75,.7,.55,.3].map(v=>'<i style="opacity:'+v+'"></i>').join('')+['W18','W19','W20','W21','W22'].map(t=>'<span>'+t+'</span>').join('')+'</div>')+
-   '<div class="card"><div class="kv"><span>Bookings from post</span><span>14</span></div><div class="kv"><span>Value</span><span>≈ 21 000 kr</span></div><div class="kv"><span>Time spent</span><span>12 min</span></div></div>'+
+  {when:'Mon 9 Mar',t:'“I finished this, just so you know”',p:'The Oracle reports back on its own: 14 early bookings. May is spread out, and 2 bands chose to wait until June.',req:['Done, just so you know','Social → money'],
+   html:()=>'<div class="app">'+apphd('Did it pay off?')+say('Just so you know: <b>14 bands booked early</b>, about <b>21 000 kr</b>. 2 chose to wait until June. May is spread out.')+
+   card('May, booked so far','m_payoff',['you','Based on bookings that came from the post and email'],'<div class="heat">'+[.9,.75,.7,.55,.3].map(v=>'<i style="opacity:'+v+'"></i>').join('')+['W18','W19','W20','W21','W22'].map(t=>'<span>'+t+'</span>').join('')+'</div>')+
+   '<div class="card"><div class="kv"><span>Early bookings</span><span>14</span></div><div class="kv"><span>Value</span><span>≈ 21 000 kr</span></div><div class="kv"><span>Rush jobs so far</span><span>1 · +360 kr</span></div></div>'+
    '<div class="acts">'+act('tap','What does this mean for hiring?','',1)+'</div></div>'},
-  {when:'09:05',t:'What if I hire?',p:'Drag the slider. Hold the chart to see how each future was made.',req:['Several futures','Hold for why'],
+  {when:'09:05',t:'What if I hire?',p:'Drag the slider. August means the apprentice is trained before the Christmas concerts. Later, and Magnus pays a salary but meets the rush alone.',req:['Several futures','Christmas peak'],
    html:()=>'<div class="app">'+apphd('What if')+say('<span id="wt">'+whatifText()+'</span>')+
-   card('Income after salary, k kr','m_whatif',['taki','Based on your income, calendar and apprentice salary rates'],'<div id="ch">'+chart()+'</div><div class="lg"><span><i style="background:#2f6fe4"></i>Probable</span><span><i style="background:#f6c400"></i>Slow autumn</span><span><i style="background:#1e9e57"></i>Price review</span><span><i style="background:#121212;opacity:.5"></i>No hire</span></div><div class="slider"><input type="range" min="0" max="5" step="1" value="'+hire+'" id="hire"><div class="ticks"><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span></div></div>')+
+   card('Income after salary, k kr','m_whatif',['taki','Based on your income, calendar and apprentice salary rates'],'<div id="ch">'+chart()+'</div><div class="lg"><span><i style="background:#2f6fe4"></i>Probable</span><span><i style="background:#f6c400"></i>Slow autumn</span><span><i style="background:#1e9e57"></i>With new prices</span><span><i style="background:#121212;opacity:.5"></i>No hire</span></div><div class="slider"><input type="range" min="0" max="5" step="1" value="'+hire+'" id="hire"><div class="ticks"><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span></div></div>')+
    '<div class="acts">'+act('tap','Ask Kari to check the plan','',1)+'</div></div>'},
   {when:'Tue 10 Mar',t:'“I’m working on it”',p:'Kari agrees, but wants 3 stable months. The Oracle says it’s now watching May and will tell Magnus when he’s there.',req:['Human in the loop','Working, I’ll tell you'],
    html:()=>'<div class="app">'+apphd('Accountant')+
-   card('Message from Kari','m_kari',['human','Based on your last 3 months of income'],'<div class="t">Hi Magnus! The plan looks good. You’re at <b>2 of 3 months</b> over 60 000 kr. If May goes as booked, August works.</div>')+
+   card('Message from Kari','m_kari',['human','Based on your last 3 months of income'],'<div class="t">Hi Magnus! The plan looks good. You’re at <b>2 of 3 months</b> over 60 000 kr. If May goes as booked, August works, and the apprentice is ready for the Christmas concerts.</div>')+
    '<div class="w" style="box-shadow:none;border-radius:20px" data-why="m_status"><div class="st"><div class="r"><span class="ic work"></span><div><small>Working on it · I’ll tell you</small>I’m watching May. I’ll tell you as soon as you reach 3 of 3.</div></div></div></div>'+
    '<div class="acts">'+act('tap','Book a call with Kari','Thursday 14:00 is free',1)+act('speak','Reply by voice','')+'</div></div>'},
-  {when:'Mon 1 Jun',t:'“I want to start this. Do you agree?”',p:'Goal reached. Before writing the job ad, the Oracle asks first. Magnus decides.',req:['Asks before it starts','Goal / KPI'],
+  {when:'Mon 1 Jun',t:'“I want to post this on FINN. Do you agree?”',p:'Goal reached. The Oracle has drafted a job ad for FINN.no, but asks before it posts anything. Magnus decides.',req:['Asks before it starts','FINN.no','Goal / KPI'],
    html:()=>'<div class="banner" style="margin-top:12px">'+taki()+'<div><b>Taki · Oracle</b>3 of 3 months over 60 000 kr. You can hire in August. 🎉</div></div><div class="app" style="margin-top:10px">'+
-   card('Goal: hire in August','m_reached',['taki','Based on March–May income and Kari’s approval'],bars([[61,'Mar','hi'],[64,'Apr','hi'],[88,'May','hi']],'#1e9e57'))+
-   '<div class="w" style="box-shadow:none;border-radius:20px" data-why="m_status"><div class="st"><div class="r"><span class="ic ask">?</span><div><small>Can I start? · you decide</small>I want to start writing a job ad for an apprentice and post it on Finn. Do you agree?</div></div></div></div>'+
-   '<div class="acts">'+act('tap','Yes, start','I’ll show you the draft first',1)+act('write','I’ll write it myself','')+'</div></div>'}
+   '<div class="w" style="box-shadow:none;border-radius:20px" data-why="m_finn"><div class="st"><div class="r"><span class="ic ask">?</span><div><small>Can I start? · you decide</small>I want to post this job ad on <b>FINN.no</b>. Do you agree?</div></div></div></div>'+
+   '<div data-why="m_finn">'+finnAd+'</div>'+
+   '<div class="acts">'+act('tap','Yes, post on FINN','Deadline 30 June',1)+act('write','Edit the ad first','')+'</div></div>'}
  ]};
 
 /* ---------------- render ---------------- */
@@ -426,21 +493,22 @@ function renderPanel(){
   '<div class="goal">'+d.goal.map(g=>'<div><small>'+g[0]+'</small>'+g[1]+'</div>').join('')+'</div>'+
   '<ol class="steps">'+d.steps.map((s,i)=>'<li data-s="'+i+'" class="'+(i===step?'on':'')+'"><span class="n">'+(i+1)+'</span><div><span class="when">'+s.when+'</span><b>'+s.t+'</b><p>'+s.p+'</p><div class="req">'+s.req.map(r=>'<span>'+r+'</span>').join('')+'</div></div></li>').join('')+'</ol>'+
   '<div class="point">'+d.point+'</div>'+
-  '<div class="changes"><b>New in v4</b>1. Every card says what it’s based on. Press and hold for why.<br>2. Black = look at this first.<br>3. Taki says what it finished, what it’s working on, and asks before it starts.<br>4. News widget with the article’s photo, a link to read it, and a clear tip.</div>';
+  '<div class="changes"><b>New in v4</b>0. Magnus: yellow goal on top with a hiring checklist, early-bird and rush prices, two rush periods (Christmas + 17 May), job ad on FINN.no.<br>1. Every card says what it’s based on. Press and hold for why.<br>2. Black = look at this first.<br>3. Taki says what it finished, what it’s working on, and asks before it starts.<br>4. News widget with the article’s photo, a link to read it, and a clear tip.</div>';
 }
 function render(){
  const d=P[cur],s=d.steps[step];
  document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.p===cur));
  const scr=document.getElementById('scr');
- scr.className='scr'+(s.scr==='home'?' '+cur:'');
- scr.innerHTML='<div class="status"><span>9:41</span><div class="island"></div><span class="batt"></span></div><div class="body">'+s.html()+'</div><div class="whyov" id="whyov"><div class="sheet"></div></div>';
+ const isSub=cur==='magnus'&&sub==='goal';
+ scr.className='scr'+(s.scr==='home'&&!isSub?' '+cur:'');
+ scr.innerHTML='<div class="status"><span>9:41</span><div class="island"></div><span class="batt"></span></div><div class="body">'+(isSub?goalScreen():s.html())+'</div><div class="whyov" id="whyov"><div class="sheet"></div></div>';
  renderPanel();
  document.getElementById('cnt').textContent=(step+1)+' / '+d.steps.length;
  document.getElementById('prev').disabled=step===0;
  document.getElementById('next').disabled=step===d.steps.length-1;
  try{localStorage.setItem('taki-oracle-v4',JSON.stringify({cur,step}))}catch(e){}
 }
-function go(i){const n=P[cur].steps.length;step=Math.max(0,Math.min(n-1,i));render()}
+function go(i){sub=null;const n=P[cur].steps.length;step=Math.max(0,Math.min(n-1,i));render()}
 
 /* press and hold → why */
 let holdT=null,held=false,holdEl=null;
@@ -464,10 +532,11 @@ document.addEventListener('contextmenu',e=>{if(e.target.closest('[data-why]'))e.
 
 document.addEventListener('click',e=>{
  if(held){held=false;e.preventDefault();return}
- const t=e.target.closest('.tabs button');if(t){cur=t.dataset.p;step=0;render();return}
+ const t=e.target.closest('.tabs button');if(t){cur=t.dataset.p;step=0;sub=null;render();return}
  const li=e.target.closest('.steps li');if(li){go(+li.dataset.s);return}
  const a=e.target.closest('[data-ask]');if(a){ASK[a.dataset.ask]=a.dataset.v;const b=document.querySelector('.body');const y=b?b.scrollTop:0;render();const b2=document.querySelector('.body');if(b2)b2.scrollTop=y;return}
- if(e.target.closest('[data-home]')){go(0);return}
+ if(e.target.closest('[data-sub]')){sub='goal';render();return}
+ if(e.target.closest('[data-home]')){if(sub){sub=null;render()}else go(0);return}
  if(e.target.closest('[data-next]')){go(step+1);return}
 },true);
 document.getElementById('prev').onclick=()=>go(step-1);
