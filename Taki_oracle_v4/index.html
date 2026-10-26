@@ -281,6 +281,28 @@ h1 span{color:var(--grey-t)}
 .fo .dots{font-weight:700;letter-spacing:1px;opacity:.8}
 .fo.pick{background:#fff;color:#121212;cursor:pointer;outline:3px solid rgba(255,255,255,.6);animation:pulse 1.6s ease-in-out infinite}
 .fo.pick small{color:#1e9e57;opacity:1;font-weight:600}
+.sw{border-radius:22px;background:#fff;color:#121212;padding:12px 12px 10px;display:flex;flex-direction:column;align-items:center;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,.08);position:relative;overflow:hidden}
+.sw.s{grid-column:span 2;grid-row:span 2}.sw.m{grid-column:span 4;grid-row:span 2}
+.sw .t{font-size:11.5px;font-weight:600;opacity:.6}
+.sw .n{font-size:30px;font-weight:700;letter-spacing:-.03em;line-height:1;margin-top:auto}
+.sw .bar{width:100%;height:7px;border-radius:4px;background:rgba(0,0,0,.08);margin-top:9px;overflow:hidden}
+.sw .bar i{display:block;height:100%;border-radius:4px;background:#1e9e57}
+.sw .c{font-size:10.5px;opacity:.6;margin-top:5px;line-height:1.25}
+.sw .src{position:static;margin-top:auto;padding-top:4px;font:500 9px/1 var(--mono);opacity:.45;background:none;color:inherit}
+.sw.sgoal{background:#f6c400;cursor:pointer}.sw.sgoal .bar{background:rgba(0,0,0,.12)}.sw.sgoal .bar i{background:#121212}
+.sw.first{background:#121212;color:#fff;cursor:pointer;outline:3px solid rgba(255,255,255,.95);animation:pulse 1.6s ease-in-out infinite}
+.sw.first .tag{position:absolute;top:10px;left:10px;font:600 9px/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;background:var(--tap);color:#fff;padding:3px 6px;border-radius:5px}
+.sw.first .bgimg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.45}
+.sw.first .in{position:relative;display:flex;flex-direction:column;align-items:center;height:100%;width:100%}
+.sw.first .n{font-size:22px;margin-top:auto}
+.sw.first .go{margin-top:8px;font-size:12px;font-weight:700;background:#fff;color:#121212;padding:6px 12px;border-radius:999px}
+.sw.first a{position:absolute;top:8px;right:8px;font:600 9px/1 var(--mono);color:#fff;text-decoration:none;background:rgba(255,255,255,.2);padding:4px 7px;border-radius:999px}
+.sw .spin{width:30px;height:30px;border-radius:50%;border:3px solid rgba(0,0,0,.1);border-top-color:#121212;animation:spin 1.2s linear infinite;margin-top:auto}
+.sw .q{font-size:13px;font-weight:700;line-height:1.2;margin-top:auto}
+.sw .yn{display:flex;gap:5px;width:100%;margin-top:8px}
+.sw .yn button{flex:1;font:600 11.5px/1 "Inter Tight",sans-serif;padding:7px 0;border-radius:999px;border:1px solid var(--line);background:#fff;cursor:pointer}
+.sw .yn button.y{background:#121212;color:#fff;border-color:#121212}
+.sw .ans{margin-top:8px;font-size:12px;font-weight:700;color:var(--speak)}
 .focus{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;background:rgba(255,255,255,.22);padding:5px 10px;border-radius:999px;margin-bottom:6px;backdrop-filter:blur(10px)}
 .focus i{width:8px;height:8px;border-radius:50%;background:#f6c400}
 .nt.need{background:#121212;color:#fff}.nt.need .nh span{color:rgba(255,255,255,.6)}
@@ -449,11 +471,12 @@ function whatifText(){const mo=['July','August','September','October','November'
  return 'Hire in <b>'+mo+'</b>: the apprentice is still learning when the <b>Christmas concerts</b> start. You pay a salary, but the rush hits you alone.';}
 
 const goalW=()=>'<div class="w s goalw" data-sub="goal" data-why="m_goal"><div class="hd">'+taki()+'<span>Goal</span><span class="flag2">›</span></div><div class="big" style="margin-top:6px">August</div><div class="lbl">Hire · earn 60k/month</div><div class="lbl" style="font-weight:500;margin-top:auto">Checklist 1/8</div><div class="prog"><i style="width:12.5%"></i></div></div>';
-const magHome=()=>'<div class="grid">'+goalW()+
- W({size:'s',name:'Money',why:'m_money',cls:'money',body:'<div class="big">48 200</div><div class="lbl">kr this month · 80 % of 60k</div><div class="prog" style="margin-top:6px"><i style="width:80%"></i></div>',basis:['taki','Bank + invoices']})+
- news(NEWS.brass,'m_news','Order valve parts now','#ff5b26','Why: your materials are +12 % since your last price change').replace('<div class="w m news"','<div class="w m news tapme" data-next').replace('<div class="srcn">','<div class="srcn"><span class="flag">First</span>')+
- sAsk('m_some','Post an early-bird offer to spread out May?','m2')+
- sWork('m_status','Comparing your prices with other repairers.')+
+const magHome=()=>'<div class="grid">'+
+ '<div class="sw s sgoal" data-sub="goal" data-why="m_goal"><span class="t">Goal: apprentice</span><span class="n">August</span><div class="bar"><i style="width:12.5%"></i></div><span class="c">1 of 8 steps done</span><span class="src">Checklist ›</span></div>'+
+ '<div class="sw s" data-why="m_money"><span class="t">This month</span><span class="n">48k</span><div class="bar"><i style="width:80%"></i></div><span class="c">of 60k needed</span><span class="src">Bank</span></div>'+
+ '<div class="sw m first" data-next data-why="m_news"><div class="bgimg" style="background-image:'+newsBg(NEWS.brass)+'"></div><span class="tag">First</span><a href="'+NEWS.brass.url+'" target="_blank" rel="noopener">Read ↗</a><div class="in"><span class="n">Brass prices are rising</span><span class="go">Order parts now</span><span class="src" style="color:#fff">News + your supplier invoices</span></div></div>'+
+ '<div class="sw s" data-why="m_some"><span class="t">Can I start?</span><span class="q">Post an early-bird offer</span>'+(ASK.m2?'<span class="ans">'+(ASK.m2==='y'?'✓ Started':'OK, not now')+'</span>':'<div class="yn"><button class="y" data-ask="m2" data-v="y">Yes</button><button data-ask="m2" data-v="n">No</button></div>')+'</div>'+
+ '<div class="sw s" data-why="m_status"><span class="t">Working on</span><span class="spin"></span><span class="c" style="margin-top:8px">Checking your prices</span><span class="src">I\u2019ll tell you</span></div>'+
  '</div>';
 
 /* checklist: hiring your first employee in an ENK (check details on Altinn / Skatteetaten) */
