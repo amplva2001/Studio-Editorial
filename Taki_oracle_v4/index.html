@@ -188,14 +188,14 @@ h1 span{color:var(--grey-t)}
 
 /* news widget: background = the article's main image */
 .w.news{color:#fff;padding:0;background:#333}
-.w.news.m{grid-row:span 3}
 .w.news .bg{position:absolute;inset:0;background-size:cover;background-position:center}
 .w.news .sh{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.15) 0%,rgba(0,0,0,.35) 40%,rgba(0,0,0,.85) 100%)}
-.w.news .in{position:relative;z-index:1;display:flex;flex-direction:column;height:100%;padding:11px 12px}
+.w.news .in{position:relative;z-index:1;display:flex;flex-direction:column;height:100%;padding:10px 12px}
 .w.news .srcn{display:flex;align-items:center;gap:6px;font:600 10px/1 var(--mono);letter-spacing:.03em;opacity:.9}
 .w.news .srcn .lk{margin-left:auto;font-size:10px;background:rgba(255,255,255,.2);padding:4px 7px;border-radius:999px;color:#fff;text-decoration:none;backdrop-filter:blur(6px)}
-.w.news .hl{font-size:13px;font-weight:600;line-height:1.25;margin-top:auto}
-.w.news .rec{display:inline-flex;align-items:center;gap:6px;margin-top:7px;font-size:12px;font-weight:700;background:#fff;color:#121212;padding:6px 9px;border-radius:999px;align-self:flex-start}
+.w.news .hl{font-size:12.5px;font-weight:600;line-height:1.2;margin-top:auto;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.w.news .basis{margin-top:4px}
+.w.news .rec{display:inline-flex;align-items:center;gap:6px;margin-top:5px;font-size:11.5px;font-weight:700;background:#fff;color:#121212;padding:6px 9px;border-radius:999px;align-self:flex-start}
 .w.news .rec i{width:8px;height:8px;border-radius:50%}
 .w.news .basis{color:rgba(255,255,255,.7)}
 .w.news .basis i.world{background:#7be0a6}
@@ -216,7 +216,6 @@ h1 span{color:var(--grey-t)}
 .whyov .conf{margin-top:10px;font-size:11px;color:var(--soft)}
 .whyov .conf b{color:var(--ink)}
 .w.goalw{background:#f6c400;color:#121212;cursor:pointer}
-.grid .w.goalw{grid-row:span 3}
 .w.goalw .prog{background:rgba(0,0,0,.12)}.w.goalw .prog i{background:#121212}
 .w.goalw .basis{color:rgba(0,0,0,.6)}
 .flag2{margin-left:auto;font:600 10px/1 "Inter Tight",sans-serif;background:#121212;color:#fff;padding:4px 7px;border-radius:999px}
@@ -245,6 +244,49 @@ h1 span{color:var(--grey-t)}
 .finn .fb p{font-size:12px;line-height:1.4;margin-top:8px}
 .finn .ft{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
 .finn .ft span{font-size:10.5px;background:#e8f0ff;color:#0046b3;padding:4px 7px;border-radius:999px;margin:0}
+.w.mini .hd{gap:6px;opacity:1;font-size:11.5px}
+.w.mini .ic{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 10px/1 sans-serif;color:#fff;flex:0 0 auto}
+.w.mini .ic.done{background:var(--speak)}
+.w.mini .ic.work{background:#fff;border:2px solid var(--line);border-top-color:#121212;animation:spin 1.2s linear infinite}
+.w.mini .ic.ask{background:var(--tap)}
+.w.mini .mt{font-size:12px;font-weight:600;line-height:1.25;margin-top:8px}
+.w.mini .mf{font-size:10px;color:var(--soft);margin-top:auto;line-height:1.25}
+.w.mini .yn{display:flex;gap:5px;margin-top:auto}
+.w.mini .yn button{flex:1;font:600 11.5px/1 "Inter Tight",sans-serif;padding:7px 0;border-radius:999px;border:1px solid var(--line);background:#fff;cursor:pointer}
+.w.mini .yn button.y{background:#121212;color:#fff;border-color:#121212}
+.w.mini .ans{margin-top:auto;font-size:12px;font-weight:700;color:var(--speak)}
+.w.goalw .flag2{padding:3px 7px;flex:0 0 auto}
+.w.s.mini .hd span.ic{flex:0 0 18px}
+.w.mini .hd span:not(.ic){flex:1}
+.lk{height:100%;display:flex;flex-direction:column;align-items:center;color:#fff;padding-top:6px}
+.lkd{font-size:17px;font-weight:600;opacity:.9}
+.lkt{font-size:86px;font-weight:700;letter-spacing:-.04em;line-height:1;margin:2px 0 26px}
+.nt{width:100%;background:rgba(255,255,255,.78);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);color:#121212;border-radius:22px;padding:11px 13px;margin-bottom:8px;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.12)}
+.nt.sm{opacity:.85;transform:scale(.96)}
+.nh{display:flex;align-items:center;gap:7px;font-size:12px}
+.nh svg{width:20px;height:20px;border-radius:5px}
+.nh span{margin-left:auto;color:var(--soft)}
+.nb{display:grid;grid-template-columns:22px 1fr;gap:9px;margin-top:7px;font-size:13px;line-height:1.35}
+.nb b{display:block;font-size:13px}
+.nb .ic{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 11px/1 sans-serif;color:#fff}
+.nb .ic.done{background:var(--speak)}
+.nb .ic.ask{background:var(--tap)}
+.fc{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:0 6px 40px;color:#fff}
+.fc .fh{background:rgba(255,255,255,.82);backdrop-filter:blur(18px);color:#121212;border-radius:24px;padding:16px 16px 14px;text-align:center;margin-bottom:6px}
+.fc .fh b{display:block;font-size:17px;margin-bottom:5px}
+.fc .fh span{font-size:12.5px;line-height:1.4;color:#444}
+.fo{width:100%;display:grid;grid-template-columns:30px 1fr 30px;align-items:center;background:rgba(30,30,30,.55);backdrop-filter:blur(18px);border-radius:999px;padding:13px 16px;text-align:center}
+.fo svg{width:22px;height:22px}
+.fo b{font-size:15px;font-weight:600}.fo small{display:block;font-size:11px;opacity:.65;font-weight:500}
+.fo .dots{font-weight:700;letter-spacing:1px;opacity:.8}
+.fo.pick{background:#fff;color:#121212;cursor:pointer;outline:3px solid rgba(255,255,255,.6);animation:pulse 1.6s ease-in-out infinite}
+.fo.pick small{color:#1e9e57;opacity:1;font-weight:600}
+.focus{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;background:rgba(255,255,255,.22);padding:5px 10px;border-radius:999px;margin-bottom:6px;backdrop-filter:blur(10px)}
+.focus i{width:8px;height:8px;border-radius:50%;background:#f6c400}
+.nt.need{background:#121212;color:#fff}.nt.need .nh span{color:rgba(255,255,255,.6)}
+.w.news .flag{font:600 9px/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;background:var(--tap);color:#fff;padding:3px 6px;border-radius:5px;margin-right:6px}
+.w.money .prog{background:var(--screen)}
+.lkb{margin-top:auto;padding-bottom:4px}.lkb span{display:block;width:120px;height:5px;border-radius:3px;background:#fff;opacity:.85}
 .changes{margin-top:14px;padding:12px 14px;border-radius:16px;background:#fff;border:1px solid var(--line);font-size:12.5px;line-height:1.5}
 .changes b{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);display:block;margin-bottom:4px}
 </style>
@@ -304,7 +346,10 @@ const WHY={
  /* Magnus */
  m_season:{k:'Seasons',h:'May is your busiest month',p:['Last May you repaired 23 brass instruments in 3 weeks.','Your calendar shows 70-hour weeks before 17 May.','School bands book late. If they book in April, May gets calmer.'],f:[['taki','Invoices last May'],['you','Your calendar'],['world','17 May']],c:'High'},
  m_goal:{k:'Goal',h:'Hire an apprentice by August',p:['You set this goal with me in January.','To afford it, you need about 60 000 kr a month for 3 months in a row.','You’re at 1 of 3 months now.'],f:[['you','Our talk in January'],['taki','Your income']],c:'High'},
- m_news:{k:'The world',h:'Too late to order brass parts cheaply? Not yet.',p:['The article expects copper and brass prices to rise before summer.','You use most valve parts in April–May.','Ordering now costs about 4 000 kr. Waiting could cost 10 % more.','If prices already rose, I’d tell you to wait instead.'],f:[['world','News article'],['taki','Your supplier invoices'],['you','Our chat last week about May']],c:'Medium'},
+ m_money:{k:'Money',h:'How this month is going',p:['48 200 kr in so far in February.','You need 60 000 kr a month for 3 months to afford an apprentice.','With what\u2019s booked, you\u2019ll likely reach about 58 000 kr. Close.'],f:[['taki','Bank account'],['taki','Invoices'],['you','Your calendar']],c:'High'},
+ m_some:{k:'Suggestion',h:'Why post an offer now',p:['Last year 23 brass jobs came in the 3 weeks before 17 May.','An early-bird offer moves bookings to March and April.','That spreads out your work, and gets you closer to the 60k goal.'],f:[['taki','Last year\u2019s invoices'],['you','Your calendar'],['you','Instagram']],c:'Medium'},
+ m_order:{k:'Order',h:'Why order now',p:['You used 40 valve pads and 12 springs last April–May.','The article expects brass and copper prices to rise before summer.','Ordering now: about 4 000 kr. Waiting could cost around 10 % more.'],f:[['world','News article'],['taki','Supplier invoices'],['you','Last spring\u2019s jobs']],c:'Medium'},
+ m_news:{k:'The world',h:'Too late to order brass parts cheaply? Not yet.',p:['Your materials already cost 12 % more than when you last changed your prices.','The article expects copper and brass prices to rise before summer.','You use most valve parts in April–May.','Ordering now costs about 4 000 kr. Waiting could cost 10 % more.','If prices already rose, I’d tell you to wait instead.'],f:[['world','News article'],['taki','Your supplier invoices'],['you','Our chat last week about May']],c:'Medium'},
  m_status:{k:'Taki is…',h:'What I’m doing for you',p:['Done: finished without you.','Working: I’ll tell you when it’s done.','Asking: I want to start, if you agree.'],f:[['taki','Taki']],c:'—'},
  m_sup:{k:'Supplier',h:'Your materials cost more',p:['Strings and pads are 12 % more expensive than when you last changed your prices.','Your rehair price hasn’t moved in 2 years.'],f:[['taki','Supplier invoices'],['taki','Your price list']],c:'High'},
  m_acct:{k:'Accountant',h:'Kari is ready',p:['Hiring is a big decision. A human should look before you decide.'],f:[['human','Kari']],c:'—'},
@@ -323,7 +368,10 @@ const bars=(d,c)=>{const mx=Math.max(...d.map(x=>x[0]));return '<div class="bars
 /* widget: o = {size,name,why,body,basis:[kind,text],cls,next,flag} */
 const W=o=>'<div class="w '+o.size+(o.cls?' '+o.cls:'')+(o.next?' tapme':'')+'"'+(o.next?' data-next':'')+' data-why="'+o.why+'"><div class="hd">'+taki()+'<span>'+o.name+'</span>'+(o.flag?'<span class="flag">'+o.flag+'</span>':'')+'</div>'+o.body+(o.basis?basis(o.basis[0],o.basis[1]):'')+'</div>';
 const card=(title,why,b,inner)=>'<div class="card" data-why="'+why+'"><h4>'+title+'</h4>'+inner+(b?basis(b[0],b[1]):'')+'</div>';
-const news=(n,why,size,rec,col,b)=>'<div class="w '+size+' news" data-why="'+why+'"><div class="bg" style="background-image:'+newsBg(n)+'"></div><div class="sh"></div><div class="in"><div class="srcn">'+n.source+'<a class="lk" href="'+n.url+'" target="_blank" rel="noopener">Read ↗</a></div><div class="hl">'+n.headline+'</div><span class="rec"><i style="background:'+col+'"></i>'+rec+'</span>'+basis('world',b)+'</div></div>';
+const news=(n,why,rec,col,b)=>'<div class="w m news" data-why="'+why+'"><div class="bg" style="background-image:'+newsBg(n)+'"></div><div class="sh"></div><div class="in"><div class="srcn">'+n.source+'<a class="lk" href="'+n.url+'" target="_blank" rel="noopener">Read ↗</a></div><div class="hl">'+n.headline+'</div><span class="rec"><i style="background:'+col+'"></i>'+rec+'</span>'+basis('world',b)+'</div></div>';
+const sAsk=(why,text,id)=>'<div class="w s mini" data-why="'+why+'"><div class="hd"><span class="ic ask">?</span><span>Can I start?</span></div><div class="mt">'+text+'</div>'+(ASK[id]?'<div class="ans">'+(ASK[id]==='y'?'✓ Started':'OK, not now')+'</div>':'<div class="yn"><button class="y" data-ask="'+id+'" data-v="y">Yes</button><button data-ask="'+id+'" data-v="n">No</button></div>')+'</div>';
+const sWork=(why,text)=>'<div class="w s mini" data-why="'+why+'"><div class="hd"><span class="ic work"></span><span>Working on</span></div><div class="mt">'+text+'</div><div class="mf">I’ll tell you when it’s done</div></div>';
+const sDone=(why,text)=>'<div class="w s mini" data-why="'+why+'"><div class="hd"><span class="ic done">✓</span><span>Done</span></div><div class="mt">'+text+'</div><div class="mf">Just so you know</div></div>';
 const status=(why,rows)=>'<div class="w l" data-why="'+why+'" style="grid-row:span '+(rows.length>2?5:4)+'"><div class="hd">'+taki()+'<span>Taki is…</span></div><div class="st">'+rows.map(r=>{
   const ic={done:'<span class="ic done">✓</span>',work:'<span class="ic work"></span>',ask:'<span class="ic ask">?</span>'}[r[0]];
   const lab={done:'Done · just so you know',work:'Working on it · I’ll tell you',ask:'Can I start? · you decide'}[r[0]];
@@ -333,18 +381,12 @@ const ASK={};
 
 /* ---------------- ANNA ---------------- */
 const annaHome=(done)=>'<div class="grid">'+
- (done?'':W({size:'s',name:'Unclear',why:'a_unclear',cls:'urgent',flag:'First',next:1,body:'<div class="big">2</div><div class="lbl">1 invoice · 1 receipt</div>',basis:['taki','Galleri Sølv is late']}))+
+ (done?W({size:'s',name:'Unclear',why:'a_unclear',cls:'calm',body:'<div class="big">0 ✓</div><div class="lbl">Nothing needs you</div>',basis:['taki','All sorted today']}):W({size:'s',name:'Unclear',why:'a_unclear',cls:'urgent',flag:'First',next:1,body:'<div class="big">2</div><div class="lbl">1 invoice · 1 receipt</div>',basis:['taki','Galleri Sølv is late']}))+
  W({size:'s',name:'VAT',why:'a_vat',cls:done?'calm':'',body:'<div class="big">'+(done?'Filed ✓':'Ready')+'</div><div class="lbl">'+(done?'9 800 kr paid':'9 800 kr · 10 Nov')+'</div>',basis:['taki','41 receipts matched']})+
- (done?W({size:'s',name:'Unclear',why:'a_unclear',cls:'calm',body:'<div class="big">0 ✓</div><div class="lbl">Nothing needs you</div>',basis:['taki','All sorted today']}):'')+
  W({size:'m',name:'Money',why:'a_money',body:'<div class="row"><div><div class="big">'+(done?'Feb':'14 Dec')+'</div><div class="lbl">'+(done?'You’re covered until February':'32 400 kr lasts until')+'</div></div><div>'+bars([[38,'Sep'],[34,'Oct'],[32,'Nov'],[done?36:22,'Dec','f'],[done?30:15,'Jan','f']],'#1e9e57')+'</div></div>',basis:['taki','Your income Sep–Oct and how slow last January was']})+
- news(NEWS.silver,'a_news','m','Order silver now, not 12 Nov','#1e9e57','Based on the article + your 6-week silver orders')+
- status('a_status',done?[
-   ['done','I sent the reminder. Galleri Sølv paid 6 500 kr.'],
-   ['done','I filed your VAT and sorted the Thune receipt as silver.'],
-   ['done','Kari adjusted your tax prepayment.']]:[
-   ['done','I matched 41 receipts to your bank account.'],
-   ['work','I’m preparing your VAT. I’ll tell you when it’s ready.'],
-   ['ask','I want to send Galleri Sølv’s invoice automatically every month. Do you agree?','a1']])+
+ news(NEWS.silver,'a_news','Order silver now, not 12 Nov','#1e9e57','Why: you order silver every 6 weeks anyway')+
+ (done?sDone('a_status','Reminder sent, VAT filed, receipt sorted.')+sDone('a_status','Kari fixed your tax prepayment.')
+      :sWork('a_status','Preparing your VAT.')+sAsk('a_status','Auto-invoice Galleri Sølv monthly?','a1'))+
  W({size:'s',name:'Due',why:'a_due',body:'<div class="big">2</div><div class="lbl">Rent 5 Nov<br>Silver 12 Nov</div>',basis:['taki','Same as every month']})+
  W({size:'s',name:'Accountant',why:'a_acct',body:'<div class="big">Kari</div><div class="lbl">'+(done?'Handled it ✓':'has 1 thing')+'</div>',basis:['human','Tax prepayment']})+
  '</div>';
@@ -355,7 +397,7 @@ const ANNA={
  goal:[['Goal','Stay afloat. Pay herself 25 000 kr a month, no surprises'],['KPI','Months covered: how long the money lasts'],['Data','Her income, bills, receipts, Kari, and one news source']],
  point:'For Anna the Oracle is a <b>quiet guardian</b>. Black means <b>look at this first</b>. Everything else can wait, and Taki tells her what it did, what it’s doing and what it wants to start.',
  steps:[
-  {when:'Mon 3 Nov · 08:10',t:'What to look at first',p:'Anna opens her phone. The black widget is the only thing that needs her: Unclear. The rest is calm. Under each widget it says what it’s based on. Press and hold any widget to see why. Scroll to see the news and what Taki is doing.',req:['Black = look first','Based on…','Hold for why','Done / Working / Asking','News with source'],
+  {when:'Mon 3 Nov · 08:10',t:'What to look at first',p:'Anna opens her phone. The black widget is the only thing that needs her: Unclear. The rest is calm. Under each widget it says what it’s based on. Press and hold any widget to see why. Scroll to see the news, what Taki is working on and what it wants to start.',req:['Black = look first','Based on…','Hold for why','Done / Working / Asking','News with source'],
    scr:'home',html:()=>annaHome(false)},
   {when:'08:11',t:'A shop hasn’t paid',p:'Galleri Sølv is 14 days late with 6 500 kr. The Oracle has already written a friendly reminder. Anna only taps Send. Hold the draft to see why it’s friendly.',req:['Draft ready','Tap'],
    html:()=>'<div class="app">'+apphd('Unclear · 1 of 2')+say('Galleri Sølv hasn’t paid <b>6 500 kr</b>. It’s 14 days late. I wrote a friendly reminder.')+
@@ -406,16 +448,12 @@ function whatifText(){const mo=['July','August','September','October','November'
  if(hire<=2)return 'Hire in <b>'+mo+'</b>: the apprentice is trained <b>before the Christmas concerts</b>. In December you’ll likely earn <b>+'+(future(hire).prob[5]-future(hire).none[5])+' 000 kr</b> more after salary, and get 10 hours a week back.';
  return 'Hire in <b>'+mo+'</b>: the apprentice is still learning when the <b>Christmas concerts</b> start. You pay a salary, but the rush hits you alone.';}
 
-const goalW=()=>'<div class="w m goalw" data-sub="goal" data-why="m_goal"><div class="hd">'+taki()+'<span>Your goal</span><span class="flag2">Checklist ›</span></div><div class="row"><div><div class="big">August</div><div class="lbl">Hire an apprentice</div></div><div style="justify-content:flex-end"><div class="lbl" style="font-weight:500">60k × 3 months · 1 of 3</div><div class="prog"><i style="width:33%"></i></div><div class="lbl" style="font-weight:500;margin-top:8px">Checklist · 1 of 8</div><div class="prog"><i style="width:12%"></i></div></div></div>'+basis('you','Based on what we agreed in January')+'</div>';
+const goalW=()=>'<div class="w s goalw" data-sub="goal" data-why="m_goal"><div class="hd">'+taki()+'<span>Goal</span><span class="flag2">›</span></div><div class="big" style="margin-top:6px">August</div><div class="lbl">Hire · earn 60k/month</div><div class="lbl" style="font-weight:500;margin-top:auto">Checklist 1/8</div><div class="prog"><i style="width:12.5%"></i></div></div>';
 const magHome=()=>'<div class="grid">'+goalW()+
- W({size:'m',name:'Seasons',why:'m_season',cls:'urgent',flag:'First',next:1,body:'<div class="row"><div><div class="big">Early-bird</div><div class="lbl">Make an offer now, before the 17 May rush</div></div><div>'+bars([[22,'S'],[30,'O'],[62,'N','hi'],[70,'D','hi'],[20,'J'],[24,'F'],[34,'M'],[40,'A'],[80,'M','hi']],'#ffffff')+'</div></div>',basis:['taki','Your invoices last year + your calendar']})+
- news(NEWS.brass,'m_news','m','Order valve parts now','#1e9e57','Based on the article + what you used last April–May')+
- status('m_status',[
-   ['done','I sent 3 invoices to school bands, just so you know.'],
-   ['work','I’m comparing your prices with similar repairers. I’ll tell you when it’s done.'],
-   ['ask','I want to start a price review for rehairs. Do you agree?','m1']])+
- W({size:'s',name:'Supplier',why:'m_sup',body:'<div class="big">+12 %</div><div class="lbl">materials since last price change</div>',basis:['taki','Supplier invoices']})+
- W({size:'s',name:'Accountant',why:'m_acct',body:'<div class="big">Kari</div><div class="lbl">ready when you are</div>',basis:['human','Before big choices']})+
+ W({size:'s',name:'Money',why:'m_money',cls:'money',body:'<div class="big">48 200</div><div class="lbl">kr this month · 80 % of 60k</div><div class="prog" style="margin-top:6px"><i style="width:80%"></i></div>',basis:['taki','Bank + invoices']})+
+ news(NEWS.brass,'m_news','Order valve parts now','#ff5b26','Why: your materials are +12 % since your last price change').replace('<div class="w m news"','<div class="w m news tapme" data-next').replace('<div class="srcn">','<div class="srcn"><span class="flag">First</span>')+
+ sAsk('m_some','Post an early-bird offer to spread out May?','m2')+
+ sWork('m_status','Comparing your prices with other repairers.')+
  '</div>';
 
 /* checklist: hiring your first employee in an ENK (check details on Altinn / Skatteetaten) */
@@ -445,14 +483,26 @@ const MAGNUS={
  goal:[['Goal','Hire an apprentice by August, trained before the Christmas concerts'],['KPI','60 000 kr a month for 3 months · 10 hours a week freed'],['Data','His income + calendar + Instagram + what he told Taki + the news']],
  point:'For Magnus the Oracle is a <b>sparring partner</b>. It keeps his goal on top, says what every suggestion is based on, tells him <b>what it will do</b>, and <b>asks before it starts</b>.',
  steps:[
-  {when:'Mon 2 Feb · 07:30',t:'Goal on top, black = look first',p:'The yellow goal is always on top: hire by August. Tap it to see the checklist for hiring in an ENK. The black widget is the most pressing thing: make an early-bird offer before the 17 May rush. Tap it.',req:['Goal on top','Checklist','Black = first','Based on…'],
+  {when:'Mon 2 Feb · 07:27',t:'He starts Work mode',p:'Magnus arrives at the workshop and turns on Work focus. From now on his phone only shows work, and Taki only talks about the business, within working hours. Tap Work.',req:['Work mode','Chooses it himself','Work and life apart'],
+   scr:'lock',html:()=>'<div class="fc"><div class="fh"><b>Choose a focus</b><span>Work shows only what matters for the business, during working hours.</span></div>'+
+    '<div class="fo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="currentColor"/></svg><span><b>Do Not Disturb</b></span><span class="dots">···</span></div>'+
+    '<div class="fo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 21c1-5 4-7 8-7s7 2 8 7" fill="currentColor"/></svg><span><b>Personal</b></span><span class="dots">···</span></div>'+
+    '<div class="fo pick" data-next><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3" width="12" height="18" rx="2"/><circle cx="12" cy="11" r="2.5" fill="currentColor"/><path d="M8.5 17c.7-2 2-3 3.5-3s2.8 1 3.5 3"/></svg><span><b>Work</b><small>Taki · 08:00–16:00</small></span><span class="dots">···</span></div>'+
+    '<div class="fo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18V8M3 14h18v4M7 11h4a3 3 0 0 1 3 3"/><circle cx="7" cy="11" r="1.5" fill="currentColor"/></svg><span><b>Sleep</b></span><span class="dots">···</span></div></div>'},
+  {when:'Mon 2 Feb · 07:28',t:'Lock screen: “I finished this”',p:'Before Magnus even opens the phone, Taki tells him what it has finished while he slept. No action needed, just so he knows. Tap the notification to open his home screen.',req:['Done, just so you know','Proactive','No app to open'],
+   scr:'lock',html:()=>'<div class="lk"><span class="focus"><i></i>Work</span><div class="lkd">Monday 2 February</div><div class="lkt">07:28</div>'+
+    '<div class="nt" data-next><div class="nh">'+taki()+'<b>Taki</b><span>now</span></div><div class="nb"><span class="ic done">✓</span><div><b>Done, just so you know</b>I sent 3 invoices to school bands. 9 600 kr is on its way.</div></div></div>'+
+    '<div class="nt need" data-next><div class="nh">'+taki()+'<b>Taki</b><span>now</span></div><div class="nb"><span class="ic ask">!</span><div><b>1 thing needs you</b>Order valve parts before prices go up.</div></div></div>'+
+    '<div class="nt sm" data-next><div class="nh">'+taki()+'<b>Taki</b><span>06:10</span></div><div class="nb"><span class="ic done">✓</span><div>I matched 12 receipts from last week. Nothing unclear.</div></div></div>'+
+    '<div class="lkb"><span></span></div></div>'},
+  {when:'Mon 2 Feb · 07:30',t:'What needs him, how it\u2019s going, what\u2019s next',p:'Work mode is on. Magnus first sees what needs his attention: the news with the orange FIRST tag says he should order valve parts before prices go up. His goal is on top (hire by August), next to how much money he has made this month. At the bottom, Taki suggests posting an early-bird offer, and shows what it is working on. Tap the news.',req:['Work mode','First = attention','Goal on top','Money','Next steps','Working / Can I start?'],
    scr:'home',html:magHome},
-  {when:'07:31',t:'Two rush periods',p:'The Oracle remembers last year: Christmas concerts and 17 May. Both times bands booked late, and Magnus worked 70-hour weeks.',req:['Memory','Hold for why'],
-   html:()=>'<div class="app">'+apphd('Seasons')+say('You have <b>two rush periods</b>: the Christmas concerts and 17 May. Both times, bands booked late and you worked <b>70-hour weeks</b>.')+
-   card('Jobs per month, last year','m_memory',['you','Based on your invoices, calendar and what you told me in June'],bars([[11,'J'],[12,'F'],[16,'M'],[18,'A'],[41,'M','hi'],[14,'J'],[6,'J'],[10,'A'],[14,'S'],[17,'O'],[30,'N','hi'],[34,'D','hi']],'#2f6fe4'))+
-   '<div class="acts">'+act('tap','What can we do about it?','',1)+'</div></div>'},
-  {when:'07:32',t:'The plan: early-bird and rush price',p:'The Oracle explains exactly what it wants to do. Book early: 15 % off. Book on short notice: 30 % more, because it means evenings and moving other customers. Or wait until June at normal price.',req:['Says what it will do','Pricing by time'],
-   html:()=>'<div class="app">'+apphd('Plan for spring')+say('Here’s what I suggest. I’ll <b>post the offer</b> on Sunday, <b>email the 12 bands</b> from last year, and <b>add the prices</b> to your booking page.')+
+  {when:'07:31',t:'Order before prices go up',p:'The Oracle has already made the order from his usual supplier, based on what he used last spring. Magnus checks it and taps Order.',req:['Draft ready','Based on…','News → action'],
+   html:()=>'<div class="app">'+apphd('Order parts')+say('Brass prices are expected to rise before summer. You used these parts last April–May. I made the order, so <b>you just approve</b>.')+
+   card('Order from your supplier','m_order',['world','Based on the article + what you used last spring'],'<div class="kv"><span>Valve pads × 40</span><span>1 600 kr</span></div><div class="kv"><span>Springs × 12</span><span>540 kr</span></div><div class="kv"><span>Valve oil × 10</span><span>1 850 kr</span></div><div class="kv tot"><span>Total</span><span>3 990 kr</span></div>')+
+   '<div class="acts">'+act('tap','Order now','Arrives Thursday',1)+act('write','Change the order','')+'</div></div>'},
+  {when:'07:32',t:'The plan: early-bird and rush price',p:'Then the suggestion from the home screen: post an offer. The Oracle reminds him why (two rush periods last year) and explains exactly what it wants to do. Book early: 15 % off. Book on short notice: 30 % more, because it means evenings and moving other customers. Or wait until June at normal price.',req:['Says what it will do','Pricing by time'],
+   html:()=>'<div class="app">'+apphd('Plan for spring')+card('Jobs per month, last year','m_memory',['you','Based on your invoices and calendar'],bars([[11,'J'],[12,'F'],[16,'M'],[18,'A'],[41,'M','hi'],[14,'J'],[6,'J'],[10,'A'],[14,'S'],[17,'O'],[30,'N','hi'],[34,'D','hi']],'#2f6fe4'))+say('Last May was chaos. Here’s what I suggest. I’ll <b>post the offer</b> on Sunday, <b>email the 12 bands</b> from last year, and <b>add the prices</b> to your booking page.')+
    card('Service price for school bands','m_offer',['taki','Based on your price list and last year’s bookings'],
     '<div class="tier g"><span>Early-bird<small>Book before 1 April</small></span><b>−15 %</b></div><div class="tier"><span>Normal<small>1 April – 1 May</small></span><b>1 200 kr</b></div><div class="tier o"><span>Rush<small>Less than 2 weeks before 17 May</small></span><b>+30 %</b></div><div class="tier wt"><span>Or wait<small>After 17 May</small></span><b>Normal price</b></div>')+
    '<div class="acts">'+act('tap','Sounds good, show me the post','',1)+act('write','Change the prices','')+'</div></div>'},
@@ -500,8 +550,8 @@ function render(){
  document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.p===cur));
  const scr=document.getElementById('scr');
  const isSub=cur==='magnus'&&sub==='goal';
- scr.className='scr'+(s.scr==='home'&&!isSub?' '+cur:'');
- scr.innerHTML='<div class="status"><span>9:41</span><div class="island"></div><span class="batt"></span></div><div class="body">'+(isSub?goalScreen():s.html())+'</div><div class="whyov" id="whyov"><div class="sheet"></div></div>';
+ scr.className='scr'+((s.scr==='home'||s.scr==='lock')&&!isSub?' '+cur:'');
+ scr.innerHTML='<div class="status"><span>'+(s.scr==='lock'&&!isSub?'':'9:41')+'</span><div class="island"></div><span class="batt"></span></div><div class="body">'+(isSub?goalScreen():s.html())+'</div><div class="whyov" id="whyov"><div class="sheet"></div></div>';
  renderPanel();
  document.getElementById('cnt').textContent=(step+1)+' / '+d.steps.length;
  document.getElementById('prev').disabled=step===0;
@@ -537,6 +587,7 @@ document.addEventListener('click',e=>{
  const a=e.target.closest('[data-ask]');if(a){ASK[a.dataset.ask]=a.dataset.v;const b=document.querySelector('.body');const y=b?b.scrollTop:0;render();const b2=document.querySelector('.body');if(b2)b2.scrollTop=y;return}
  if(e.target.closest('[data-sub]')){sub='goal';render();return}
  if(e.target.closest('[data-home]')){if(sub){sub=null;render()}else go(0);return}
+ if(e.target.closest('a'))return;
  if(e.target.closest('[data-next]')){go(step+1);return}
 },true);
 document.getElementById('prev').onclick=()=>go(step-1);
