@@ -312,6 +312,7 @@ h1 span{color:var(--grey-t)}
 .sw.news2 .tag2{font:600 9px/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;background:var(--tap);color:#fff;padding:3px 6px;border-radius:5px}
 .sw.news2 .n{font-size:17px;margin-top:6px;line-height:1.1}
 .sw.news2 .go{margin-top:7px;font-size:11.5px;font-weight:700;background:#121212;color:#fff;padding:6px 11px;border-radius:999px}
+.sw.news2 .do{margin-top:4px;font-size:13px;font-weight:600;color:#ff5b26}
 .sw.news2 .src{margin-top:6px;padding:0;font-size:8.5px;text-align:left}
 .sw.news2 a{background:rgba(0,0,0,.06);color:#121212}
 .focus{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;background:rgba(255,255,255,.22);padding:5px 10px;border-radius:999px;margin-bottom:6px;backdrop-filter:blur(10px)}
@@ -494,7 +495,7 @@ function whatifText(){const mo=['juli','august','september','oktober','november'
 const magHome=()=>'<div class="grid">'+
  '<div class="sw s sgoal" data-sub="goal" data-why="m_goal"><span class="t">Mål: lærling</span><span class="n">August</span><div class="bar"><i style="width:12.5%"></i></div><span class="c">1 av 8 steg gjort</span><span class="src">Sjekkliste ›</span></div>'+
  '<div class="sw s" data-why="m_money"><span class="t">Denne måneden</span><span class="n">48k</span><div class="bar"><i style="width:80%"></i></div><span class="c">av 60k som trengs</span><span class="src">Bank</span></div>'+
- '<div class="sw m news2" data-next data-why="m_news"><div class="lg2" style="background-image:url('+SUPPLIER_LOGO+')"></div><div class="tx"><span class="n">Messingprisene stiger</span><span class="go">Bestill deler</span><span class="src">Leverandør + dine fakturaer</span></div></div>'+
+ '<div class="sw m news2" data-next data-why="m_news"><div class="lg2" style="background-image:url('+SUPPLIER_LOGO+')"></div><div class="tx"><span class="n">Messingprisene stiger</span><span class="do">Bestill deler nå</span><span class="src">Leverandør + dine fakturaer</span></div></div>'+
  '<div class="sw s" data-why="m_some"><span class="t">Kan jeg starte?</span><span class="q">Poste et tidlig-tilbud</span>'+(ASK.m2?'<span class="ans">'+(ASK.m2==='y'?'✓ Startet':'OK, ikke nå')+'</span>':'<div class="yn"><button class="y" data-ask="m2" data-v="y">Ja</button><button data-ask="m2" data-v="n">Nei</button></div>')+'</div>'+
  '<div class="sw s" data-why="m_status"><span class="t">Jobber med</span><span class="spin"></span><span class="c" style="margin-top:8px">Sjekker prisene dine</span><span class="src">Jeg sier fra</span></div>'+
  '</div>';
